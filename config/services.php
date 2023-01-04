@@ -33,7 +33,7 @@ return [
     'google' => [
         'client_id' => '423669137501-22h8dpnb4ib627vl3nq6099kbt3tph30.apps.googleusercontent.com', //USE FROM Google DEVELOPER ACCOUNT
         'client_secret' => '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', //USE FROM Google DEVELOPER ACCOUNT
-        'redirect' => 'https://127.0.0.1:8003/google/callback'
+        'redirect' => 'http://127.0.0.1:8003/google/callback'
     ],
 
 

@@ -16,11 +16,7 @@ class GoogleController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function test()
-    {
-        dd('shakil');
-    }
-
+   
     public function handleGoogleCallback()
     {
         try {

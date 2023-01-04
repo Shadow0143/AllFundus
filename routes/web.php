@@ -25,7 +25,7 @@ Route::prefix('kamal-kalra')->group(function () {
 
 
 Route::get('/google/login', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
-Route::any('/google/callback', [App\Http\Controllers\GoogleController::class, 'test'])->name('test');
+Route::any('/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
 
 
