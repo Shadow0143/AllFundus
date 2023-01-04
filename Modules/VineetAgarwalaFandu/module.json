@@ -1,0 +1,13 @@
+{
+    "name": "VineetAgarwalaFandu",
+    "alias": "vineetagarwalafandu",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VineetAgarwalaFandu\\Providers\\VineetAgarwalaFanduServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

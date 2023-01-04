@@ -1,0 +1,13 @@
+{
+    "name": "KamalKalraFandu",
+    "alias": "kamalkalrafandu",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\KamalKalraFandu\\Providers\\KamalKalraFanduServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

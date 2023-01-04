@@ -1,0 +1,1039 @@
+/* CSS Document */
+
+/* general*/
+
+@import url(font-awesome.css);
+@import url("reset.css");
+:focus {
+    border: 0;
+    outline: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+figure {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a {
+    -ms-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+    display: block;
+}
+
+.clears:after {
+    clear: both;
+    display: block;
+    content: "";
+}
+
+body {
+    font-family: "Candara";
+}
+
+/* fonts start */
+
+/* @font-face {
+    font-family: 'Arista Pro';
+    src: url('../fonts/AristaProTrial-Bold.eot');
+    src: url('../fonts/AristaProTrial-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/AristaProTrial-Bold.woff2') format('woff2'), url('../fonts/AristaProTrial-Bold.woff') format('woff'), url('../fonts/AristaProTrial-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;  
+} */
+
+@font-face {
+    font-family: "Arista Pro extralight";
+    src: url("../fonts/AristaProTrial-ExtraLight.eot");
+    src: url("../fonts/AristaProTrial-ExtraLight.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-ExtraLight.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-ExtraLight.woff") format("woff"),
+        url("../fonts/AristaProTrial-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro extrabold";
+    src: url("../fonts/AristaProTrial-Fat.eot");
+    src: url("../fonts/AristaProTrial-Fat.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-Fat.woff2") format("woff2"), url("../fonts/AristaProTrial-Fat.woff") format("woff"),
+        url("../fonts/AristaProTrial-Fat.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro Hairline";
+    src: url("../fonts/AristaProTrial-Hairline.eot");
+    src: url("../fonts/AristaProTrial-Hairline.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-Hairline.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-Hairline.woff") format("woff"),
+        url("../fonts/AristaProTrial-Hairline.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro Light";
+    src: url("../fonts/AristaProTrial-Light.eot");
+    src: url("../fonts/AristaProTrial-Light.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-Light.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-Light.woff") format("woff"),
+        url("../fonts/AristaProTrial-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro Regular";
+    src: url("../fonts/AristaProTrial-Regular.eot");
+    src: url("../fonts/AristaProTrial-Regular.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-Regular.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-Regular.woff") format("woff"),
+        url("../fonts/AristaProTrial-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro bold";
+    src: url("../fonts/AristaPro-Bold.eot");
+    src: url("../fonts/AristaPro-Bold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaPro-Bold.woff2") format("woff2"), url("../fonts/AristaPro-Bold.woff") format("woff"),
+        url("../fonts/AristaPro-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro semibold";
+    src: url("../fonts/AristaProTrial-SemiBold.eot");
+    src: url("../fonts/AristaProTrial-SemiBold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-SemiBold.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-SemiBold.woff") format("woff"),
+        url("../fonts/AristaProTrial-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Arista Pro thin";
+    src: url("../fonts/AristaProTrial-Thin.eot");
+    src: url("../fonts/AristaProTrial-Thin.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/AristaProTrial-Thin.woff2") format("woff2"),
+        url("../fonts/AristaProTrial-Thin.woff") format("woff"),
+        url("../fonts/AristaProTrial-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Candara Regular";
+    src: url("../fonts/Candara.eot");
+    src: url("../fonts/Candara.eot?#iefix") format("embedded-opentype"), url("../fonts/Candara.woff2") format("woff2"),
+        url("../fonts/Candara.woff") format("woff"), url("../fonts/Candara.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Candara bold";
+    src: url("../fonts/Candara-Bold.eot");
+    src: url("../fonts/Candara-Bold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Candara-Bold.woff2") format("woff2"), url("../fonts/Candara-Bold.woff") format("woff"),
+        url("../fonts/Candara-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Candara light";
+    src: url("../fonts/Candara-Light.eot");
+    src: url("../fonts/Candara-Light.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/Candara-Light.woff2") format("woff2"), url("../fonts/Candara-Light.woff") format("woff"),
+        url("../fonts/Candara-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+.container {
+    max-width: 1280px;
+}
+
+/* Header Section */
+
+.headersec01 {
+    position: relative;
+}
+
+.togglemenu45 {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    font-size: 24px;
+    color: #444;
+    display: flex;
+    align-items: center;
+}
+
+.togglemenu45 span {
+    color: #999;
+    font-size: 16px;
+    padding: 0 0 0 12px;
+}
+
+.tlinfotop44 {
+    display: flex;
+    align-items: center;
+}
+
+.tlinfotop44 span {
+    font-size: 16px;
+    color: #e85625;
+    font-weight: bold;
+    padding-right: 15px;
+    position: relative;
+}
+
+.tlinfotop44 span:last-child:after {
+    position: absolute;
+    top: 0;
+    content: ".";
+    font-size: 25px;
+    color: #e85625;
+    line-height: 2px;
+    /* height: 5px; */
+    display: inline-block;
+    bottom: auto;
+    left: -10px;
+}
+
+.header_outer {
+    min-height: 58px;
+}
+
+.topleft01 figure {
+    margin-bottom: 10px;
+}
+
+.topleft01 figure img {
+    border-radius: 10px 10px 0 0;
+    display: block;
+    width: 100%;
+}
+
+.topleftinfo45 h2 {
+    color: #1a0552;
+    font-size: 40px;
+    margin-bottom: 10px;
+    line-height: normal;
+}
+
+.duraday55 {
+    display: block;
+    font-size: 20px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.duraday55 i {
+    margin-right: 8px;
+}
+
+p {
+    font-size: 18px;
+    color: #1d0553;
+    line-height: 24px;
+    font-family: "Candara Regular";
+}
+
+.topleftinfo45 p {
+    margin-bottom: 15px;
+}
+
+.readmore88 {
+    display: inline-block;
+    color: #e95527;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.btmtopinfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btmtopinfo .left45 {
+    display: inline-flex;
+    align-items: center;
+}
+
+.btmtopinfo .left45 figure {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    border-radius: 100%;
+    background-color: #b9def0;
+    margin-right: 10px;
+}
+
+.topleft01 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.topleftinfo45 {
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.aboutme56 {
+    background: #ebebeb;
+    padding: 45px 35px;
+}
+
+.aboutme56 h2 {
+    font-family: "Arista Pro bold";
+    font-size: 60px;
+    color: #e85625;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.aboutme56 p {
+    margin-bottom: 15px;
+}
+
+.aboutme56 span {
+    font-size: 28px;
+    color: #1d0553;
+    margin-bottom: 20px;
+    font-weight: 400;
+    display: block;
+}
+
+.aboutme56 span strong {
+    display: inline-block;
+}
+
+.rdmore698 i {
+    color: #fff;
+    background: #1a0552;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 45px;
+    margin-right: 10px;
+}
+
+.bnrttopbanner56 {
+    background: #1a0552;
+    margin-top: -65px;
+    padding: 0;
+}
+
+.logo {
+    margin-bottom: 0px;
+}
+
+.logo a {
+    font-size: 80px;
+    color: #e85625;
+    line-height: normal;
+    font-family: "Arista Pro bold";
+}
+
+.bannertopinfo55 {
+    padding: 40px;
+}
+
+.bnrttopbanner56 h2 {
+    font-family: "Candara Regular";
+    font-size: 50px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.bnrttopbanner56 span {
+    display: block;
+    font-size: 40px;
+}
+
+.bnrttopbanner56 small {
+    display: block;
+    font-size: 25px;
+}
+
+.readmr568 {
+    display: inline-flex;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    font-family: "Arista Pro bold";
+}
+
+.youcan {
+    font-size: 36px;
+    color: #e95525;
+    font-family: "Candara bold";
+    margin-bottom: 20px;
+}
+
+.topbtminfo45 {
+    padding: 0px 40px 20px;
+}
+
+.topbtminfo45 p {
+    font-family: "Candara Regular";
+    font-size: 24px;
+    color: #e85625;
+    margin-bottom: 15px;
+    line-height: 30px;
+}
+
+.readmr568 img {
+    margin-right: 15px;
+}
+
+/* list section */
+
+.fndulist456 li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e85625;
+}
+
+.fndulist456 li img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    width: 60px;
+}
+
+.fndulist456 li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 110px);
+}
+
+.fndulist456 li:last-child {
+    border: 0;
+}
+
+/* list section */
+
+.togethersec15 span {
+    font-family: "Arista Pro bold";
+    width: calc(100% - 200px);
+    display: inline-block;
+    font-size: 60px;
+    color: #fff;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.togethersec15 figure {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #1a0552;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    line-height: 75px;
+    -ms-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+}
+
+.togethersec15 {
+    background: #e85625;
+    padding: 35px 35px 25px;
+}
+
+.togethersec15:hover figure {
+    -ms-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -webkit-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+    transform: scale(1.1);
+}
+
+.servsec012 {
+    padding: 35px;
+    background: #1a0552;
+}
+
+.servtop55 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.servtop55 h3 {
+    font-family: "Arista Pro bold";
+    width: 42%;
+    display: inline-flex;
+    font-size: 60px;
+    color: #fff;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.servtop55 figure {
+    width: 50%;
+}
+
+.servsec012 p {
+    margin-bottom: 15px;
+    color: #e85625;
+    padding-right: 27%;
+}
+
+/* list section */
+
+.servlist58 li {
+    padding: 10px 0;
+    border-bottom: 1px solid #5149c9;
+}
+
+.servlist58 li img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    width: 25px;
+}
+
+.servlist58 li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 67px);
+    padding: 0;
+    color: #fff;
+    margin: 0;
+}
+
+.servlist58 li:last-child {
+    border: 0;
+}
+
+/* list section */
+
+.featuresec56 {
+    background: #ebebeb;
+    padding: 40px;
+}
+
+.featuresec56 h2 {
+    font-size: 48px;
+    color: #e95525;
+    font-family: "Arista Pro bold";
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.featuresec56 span {
+    font-size: 36px;
+    color: #e95525;
+    font-family: "Arista Pro bold";
+    display: block;
+    padding: 5px 0;
+}
+
+.featuresec56 p {
+    margin-bottom: 20px;
+}
+
+.featurelist255 {
+    margin-bottom: 50px;
+}
+
+.featurelist255 li {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #1c0552;
+}
+
+.featuresec56 .readmr568 {
+    color: #1a0552;
+}
+
+/* testimonial */
+
+.testimonial58 {
+    background: #e85625;
+    padding: 40px;
+}
+
+.testimonial58 h2 {
+    font-size: 28px;
+    color: #fff;
+    font-family: "Arista Pro bold";
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.testimonial58 h2 span {
+    font-size: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.testimonblock99 {
+    margin-bottom: 30px;
+}
+
+.testmoinfo55 h3 {
+    font-size: 30px;
+    margin-bottom: 0;
+    font-family: "Arista Pro bold";
+    color: #1a0552;
+    text-transform: uppercase;
+}
+
+.testmoinfo55 span {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #1c0552;
+    display: block;
+}
+
+.testimonblock99 figure {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 15px;
+    border: 5px solid #fff;
+}
+
+.testmoinfo55 {
+    display: inline-block;
+    width: calc(100% - 180px);
+}
+
+/* footer */
+
+.logofooter {
+    margin-bottom: 20px;
+}
+
+.logofooter a {
+    display: inline-block;
+    font-size: 60px;
+    font-family: "Arista Pro bold";
+    color: #e85625;
+}
+
+.footerinfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerinfo p {
+    width: 200px;
+}
+
+.footerinfo .rightinfo56 a {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #1c0552;
+}
+
+.footerblock h2 {
+    font-size: 24px;
+    color: #e95525;
+    margin-bottom: 20px;
+    font-family: "Arista Pro bold";
+    text-transform: uppercase;
+}
+
+.footmenu li {
+    margin-bottom: 12px;
+}
+
+.footmenu a {
+    display: inline-block;
+    color: #1a0552;
+}
+
+.socialmedia a {
+    font-size: 30px;
+    background: #e95525;
+    display: inline-block;
+    border-radius: 50%;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 12px;
+}
+
+.socialmedia a:hover {
+    color: #1a0552;
+}
+
+.btmfooter {
+    background: #e85625;
+    padding: 20px 0;
+}
+
+.btmfooter p {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+.footertop45 {
+    padding: 50px 0;
+}
+
+/* Footer end */
+
+.togethersec15.blogpost565 {
+    background: #1a0552;
+}
+
+.togethersec15.blogpost565 figure {
+    background: #e85625;
+}
+
+.leftsidebar45 {
+    position: sticky;
+    top: 0;
+}
+
+/* side menu */
+
+/* sidebar popup */
+
+/*******************************
+* MODAL AS LEFT/RIGHT SIDEBAR
+* Add "left" or "right" in modal parent div, after class="modal".
+* Get free snippets on bootpen.com
+*******************************/
+
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 320px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/*Left*/
+
+.modal.left.fade .modal-dialog {
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.show .modal-dialog {
+    left: 0;
+}
+
+/*Right*/
+
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.show .modal-dialog {
+    right: 0;
+}
+
+.menuside45 .modal-header {
+    font-size: 20px;
+    color: #e85625;
+    background: #1a0552;
+    text-align: center;
+}
+
+.menuside45 .close {
+    position: absolute;
+    right: 20px;
+    font-size: 41px;
+    color: #fff;
+    opacity: 1;
+    line-height: normal;
+    top: 0;
+}
+
+.category_list22 li {
+    padding: 5px 6px;
+    border-bottom: 1px solid #5149c9;
+}
+
+.category_list22 li:last-child {
+    border: 0;
+}
+
+.category_list22 li a {
+    display: block;
+    color: #000;
+    font-size: 18px;
+    font-family: "Candara Regular";
+}
+
+.modal-title {
+    font-family: "Arista Pro Regular";
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* left menu ends */
+
+@media only screen and (max-width: 767px) {
+    .bnrttopbanner56 {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .togethersec15 span {
+        font-family: "Arista Pro bold";
+        width: calc(100% - 90px);
+        font-size: 36px;
+    }
+    .servtop55 h3 {
+        font-family: "Arista Pro bold";
+        width: 100%;
+        display: flex;
+        font-size: 60px;
+        color: #fff;
+    }
+    .servtop55 {
+        display: block;
+    }
+    .servtop55 h3 {
+        font-size: 30px;
+    }
+    .servtop55 figure {
+        width: 100%;
+    }
+    .servsec012 p {
+        padding-right: 0;
+    }
+    .featuresec56 span {
+        font-size: 30px;
+    }
+    .featuresec56 h2 {
+        font-size: 38px;
+    }
+    .testimonial58 h2 {
+        display: block;
+    }
+    .testmoinfo55 {
+        display: block;
+        width: 100%;
+    }
+    .testimonblock99 figure {
+        margin-bottom: 15px;
+    }
+    .bannerright458 {
+        margin-bottom: 25px;
+    }
+    .topleftinfo45 h2 {
+        font-size: 30px;
+    }
+    .footerinfo {
+        display: block;
+    }
+    .footerblock {
+        padding: 15px 0;
+    }
+    .logo a {
+        font-size: 50px;
+    }
+    .bnrttopbanner56 h2 {
+        font-size: 34px;
+    }
+    .bnrttopbanner56 span {
+        font-size: 30px;
+    }
+    .aboutme56 h2 {
+        font-size: 40px;
+    }
+}
+
+/* Personal Website */
+
+.hello45 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #777;
+    display: block;
+}
+
+.toprightban458 h2 {
+    font-size: 48px;
+    line-height: 42px;
+    margin-bottom: 20px;
+}
+
+.qulify01 {
+    display: block;
+    margin-bottom: 30px;
+    padding-inline-start: 0;
+}
+
+.qulify01 li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 18px;
+    color: #777;
+    font-size: 16px;
+}
+
+.toprightban458 p {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.social45 a {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #fca4ad;
+    margin-right: 8px;
+}
+
+.social45 a:hover {
+    color: #5149c9;
+}
+
+.goalsection45 {
+    background: #fffafa;
+}
+
+.padd01 {
+    padding: 35px;
+}
+
+.goalsection45 h2 {
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-family: "Candara bold";
+}
+
+.goalsection45 p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.interest_section568 h2 {
+    color: #2998f2;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-family: "Candara bold";
+}
+
+.interest_section568 p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.interest_list55 li a {
+    padding: 20px;
+    background-color: #fffafa;
+    color: #fc93a1;
+    border-radius: 8px;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.interest_list55 li:hover a {
+    color: #000;
+}
+
+.socalpart45 h2 {
+    color: #2998f2;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-family: "Candara bold";
+}
+
+.socalpart45 li {
+    display: inline-block;
+    vertical-align: top;
+    width: 32%;
+    margin: 5px;
+    margin-bottom: 8px;
+}
+
+.persrightsec88 {
+    margin-top: -95px;
+}
+
+.topritleftin45 {
+    padding-top: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+    .persrightsec88 {
+        margin-top: 0;
+    }
+    .profileimg898 {
+        text-align: center;
+    }
+    .profileimg898 figure {
+        display: inline-block;
+    }
+}
