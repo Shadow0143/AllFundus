@@ -49,13 +49,12 @@
                 @else
                     <p class="post_details">{!! $post['post_content'] !!}</p>
                 @endif
-                    {{count($post->post_image)}}
-                    <div class="light_gallery @if(count($post->post_image) == 1) gitem @elseif(count($post->post_image) == 2) gitem2 @elseif(count($post->post_image) == 3) gitem3 @elseif(count($post->post_image) == 4) gitem4 @elseif(count($post->post_image) == 5) gitem5  @elseif(count($post->post_image) > 5) gitem6  @endif"    id="lightGallery">
+                    <div class="light_gallery @if(count($post->post_image) == 1) gitem @elseif(count($post->post_image) == 2) gitem2 @elseif(count($post->post_image) == 3) gitem3 @elseif(count($post->post_image) == 4) gitem4 @elseif(count($post->post_image) == 5) gitem5  @elseif(count($post->post_image) >= 6) gitem6  @endif"    id="lightGallery">
                         @foreach($post->post_image as $image)
                         <a href="{{asset('uploads')}}/{{$image->image}}" data-sub-html="{{$post->title}}">
                             <img src="{{asset('uploads')}}/{{$image->image}}" alt="{{$image->image}}"
                                 class="img-responsive">
-                            @if(count($post->post_image) > 5)
+                            @if(count($post->post_image) >= 6)
                                 <div class="more_img_overlay">
                                     <span>+{{count($post->post_image)-5}}</span>
                                 </div>

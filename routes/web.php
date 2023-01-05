@@ -14,14 +14,19 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('fanduwelcome');
+Route::get('/create-your-own-site', [App\Http\Controllers\CommonController::class, 'createYourOwnSite'])->name('createYourOwnSite');
+Route::post('/submit-your-own-site', [App\Http\Controllers\CommonController::class, 'submitYourOwnSite'])->name('submitYourOwnSite');
 
-Route::prefix('vineet-agarwala')->group(function () {
-    Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('vineetwelcome');
-});
+// Route::prefix('vineet-agarwala')->group(function () {
+//     Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('vineetwelcome');
+// });
 
-Route::prefix('kamal-kalra')->group(function () {
-    Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('kamalwelcome');
-});
+// Route::prefix('kamal-kalra')->group(function () {
+//     Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('kamalwelcome');
+// });
+
+
+Route::get('/{segment}', [App\Http\Controllers\CommonController::class, 'index'])->name('commonwelcome');
 
 
 Route::get('/google/login', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');

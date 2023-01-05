@@ -45,7 +45,7 @@ class CommonController extends Controller
 
             foreach ($all_comments as $key2 => $comm) {
                 $reply                                      = Replys::where('comment_id', $comm->id)->orderBy('id', 'desc')->get();
-                $all_comments[$key2]->all_reply = $reply;
+                $all_comments[$key2]->all_reply             = $reply;
             }
 
             $post[$key]->tags                               = json_decode($val->tag, true);
@@ -153,5 +153,22 @@ class CommonController extends Controller
 
 
         return view('leftviews.moreDetails')->with('data', $array)->with('post', $post_data)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
+    }
+
+    public function createYourOwnSite()
+    {
+        return view('createYourOwnSite');
+    }
+
+    public function submitYourOwnSite(Request $request)
+    {
+        $username = Auth::user()->name;
+        $segment = str_replace(' ','-',$username);
+        $themeselected = User::find(Auth::user()->id);
+        $themeselected->role = 'owner';
+        $themeselected->segment = $segment;
+        $themeselected->my_theme = $request->selected_theme;
+        $themeselected->save();
+        return redirect('/'.$segment);
     }
 }

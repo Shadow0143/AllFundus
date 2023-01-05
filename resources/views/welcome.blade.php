@@ -118,9 +118,13 @@
     </div>
 </div>
 
+@if(Auth::check() && Auth::user()->role=='owner')
 
-
-
+@elseif(Auth::check())
+<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
+@else
+<a href="javaScript:void(0);" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
+@endif
 
 
 @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
@@ -432,7 +436,6 @@
         </div>
     </div>
 </div>
-
 
 
 @endif
