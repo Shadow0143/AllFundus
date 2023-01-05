@@ -287,7 +287,9 @@ $(document).ready(function(e) {
                         return ;
                     }
                     $('.loader').hide();
+                    $("#lightGallery").lightGallery();
                     $("#commonleft").append(data.html);
+
                 },error:function(err){
                     console.log(err);
                 }

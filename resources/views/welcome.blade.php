@@ -142,12 +142,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="user_info">
-                        <div class="user_info_inner">
-                            <figure>
-                                <img src="{{ asset('images/profile.jpg') }}" alt="">
-                            </figure>
-                            <h4>Veenit Agarwal</h4>
-                        </div>
+                       
                         <select class="user_post_type " name="postType" id="postType">
                             <option value="post">Post</option>
                             <option value="blog">Blog</option>
@@ -189,10 +184,7 @@
                         <h3>Add to Your Post</h3>
                         <div class="row">
                             <div class="col-4">
-                                {{-- <a href="javaScript:void(0);" class="btn btn-sm btn-outline-primary"
-                                    onclick="postImageModal()">
-                                    <i class="fa fa-picture-o"></i>
-                                </a> --}}
+                              
                                 <label for="tags">Select Image </label>
                                 <input type="file" name="post_image[]" id="post_image" class="form-control" multiple>
 
@@ -451,17 +443,25 @@
     <div class="modal-dialog" role="document" id="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sign in with Google</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closemodal()"
                     id="googleclosebutton">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body loginbtn" >
                 <a href="{{ route('redirectToGoogle') }}"
-                    class="btn btn-outline-primary btn-block btn-lg google">Continue with &nbsp;<i
-                        class="fa-brands fa-google-plus-g"></i> &nbsp; </a>
+                    class="btn btn-outline-danger btn-block btn-lg google"><i
+                        class="fa-brands fa-google-plus-g"></i> </a>
+                <a href="{{ route('loginUsingFacebook') }}"
+                            class="btn btn-outline-primary btn-block btn-lg google"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
             </div>
+
+            <div class="modal-body">
+
+            </div>
+
+
 
         </div>
     </div>
@@ -471,7 +471,6 @@
 @endsection
 
 @section('js')
-
 
 {{-- <script>
     $('#edit1section').click(function() {

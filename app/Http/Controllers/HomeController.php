@@ -298,7 +298,11 @@ class HomeController extends Controller
     public function deletePost(Request $request)
     {
 
-        $delete                                                 = Post::find($request->id);
+        $postImages                                             = postImages::where('post_id',$request->id)->get();
+        foreach($postImages as $key=>$val){
+            unlink("uploads/" . $val->image);
+        }
+        $delete                                                 = PostTable::find($request->id);
         $delete->delete();
     }
 }

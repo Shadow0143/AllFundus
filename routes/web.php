@@ -27,6 +27,10 @@ Route::prefix('kamal-kalra')->group(function () {
 Route::get('/google/login', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
 Route::any('/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
+Route::get('/fb/auth', [App\Http\Controllers\FacebokController::class, 'loginUsingFacebook'])->name('loginUsingFacebook');
+Route::get('/fb/callback', [App\Http\Controllers\FacebokController::class, 'callbackFromFacebook'])->name('callbackFromFacebook');
+
+
 
 
 Route::get('/post-details/{id}', [App\Http\Controllers\CommonController::class, 'postDetails'])->name('fandupostDetails');

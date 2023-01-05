@@ -37,4 +37,12 @@ return [
     ],
 
 
+    'facebook' => [
+        'client_id' => '2430696760416730', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => '3dbb592be013a9c74a8baa3423a077c0', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'redirect' => 'http://127.0.0.1:8003/fb/callback'
+    ],
+    
+
+
 ];
