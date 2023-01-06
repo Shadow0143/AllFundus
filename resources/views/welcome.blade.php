@@ -6,7 +6,9 @@
     @if (Auth::check())
     <div class="header_login">
         <div class="header_inner">
-            <a href="" data-toggle="collapse" data-target="#demo"> Hi! {{ Auth::user()->name }} <i
+            <a href="" data-toggle="collapse" data-target="#demo"> Hi! 
+                {{ Auth::user()->name }}  
+            <i
                     class="fa fa-angle-down"></i></a>
             <div id="demo" class="collapse header-clp">
                 <ul>
@@ -82,15 +84,14 @@
     
         <div class="mobileHeader">
             <div class="mobileHeader_inner">
-                @if(Request::segment(1) =='')
+                @if(Request::segment(1) == $segment && $user->my_theme =='1')
                 @include('rightviews.fanduCommon')
-                @elseif(Request::segment(1) =='vineet-agarwala')
+                @elseif(Request::segment(1) == $segment && $user->my_theme =='2')
                 @include('rightviews.vineetCommon')
-                @elseif(Request::segment(1) =='kamal-kalra')
+                @elseif(Request::segment(1) == $segment  && $user->my_theme =='3')
                 @include('rightviews.kamalCommon')
                 @else
                 @include('rightviews.fanduCommon')
-    
                 @endif
     
             </div>
@@ -105,11 +106,11 @@
 
     <div class="pw-right">
         <div class="pwRightInr">
-            @if(Request::segment(1) =='')
+            @if(Request::segment(1) == $segment && $user->my_theme =='1')
             @include('rightviews.fanduCommon')
-            @elseif(Request::segment(1) =='vineet-agarwala')
+            @elseif(Request::segment(1) == $segment && $user->my_theme =='2')
             @include('rightviews.vineetCommon')
-            @elseif(Request::segment(1) =='kamal-kalra')
+            @elseif(Request::segment(1) == $segment  && $user->my_theme =='3')
             @include('rightviews.kamalCommon')
             @else
             @include('rightviews.fanduCommon')
@@ -129,11 +130,11 @@
 
 @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
 
+
 <button class="" onclick="openForm()" data-toggle="modal" data-target="#myModal">Post</button><br>
 <button class=" btn btn-outline-warning testimonial_btn mr-2" onclick="opentestimonialForm()">Testimonial</button><br>
 <button class="btn btn-outline-dark right_btn" onclick="rightContentForm()">Right Content</button>
 <button class=" btn btn-outline-primary " onclick="tagsCategory()">Tags & category</button>
-<button onclick="openIntrestForm()" class=" int_button intrest_btn">Intrest</button>
 
 <div class="modal fade pw_modal" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -429,6 +430,69 @@
                 </div>
                 <div class="publish_post text-center mb-3 mt-2">
                     <button class="publish_post btn btn-outline-primary ">Add</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade pw_modal" id="userGoals" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('submitGoals') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Company / Project logos</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="goalmodalemove()">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="goal" name="goal">
+                        <div class="fieldrow">
+                            <input type="file" placeholder="" name="goal" requird  class="form-control" />
+                        </div>
+                        <div class="fieldrow">
+                            <input type="text" placeholder="Company Link" name="goal_link" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Add</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade pw_modal" id="changePic" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Profile Pic</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="profilepicmodalemove()">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="user_profile" name="user_profile">
+                        <div class="fieldrow">
+                            <input type="file" placeholder="" name="user_profile" requird  class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Change</button>
                 </div>
 
 

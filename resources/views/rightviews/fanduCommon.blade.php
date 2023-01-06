@@ -1,5 +1,5 @@
 @section('title')
-<title>Fandu.me</title>
+<title>{{$user->name}}</title>
 @endsection
 
 

@@ -62,26 +62,7 @@
 
     <link rel="icon" href="" type="image/gif" sizes="">
     @yield('css')
-    <style>
-        .navbar1 {
-            overflow: hidden;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        body.chat-popup .pw-body {
-            -webkit-filter: blur(4px);
-            -moz-filter: blur(4px);
-            -o-filter: blur(4px);
-            -ms-filter: blur(4px);
-            filter: blur(4px);
-            filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
-            filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
-        }
-    </style>
+   
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

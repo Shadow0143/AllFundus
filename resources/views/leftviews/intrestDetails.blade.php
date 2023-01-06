@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Fandu.me</title>
+<title>{{$user->name}} | {{$myIntrest->title}}</title>
+
 @endsection
 
 @section('content')
@@ -49,11 +50,11 @@
 
     <div class="pw-right">
         <div class="pwRightInr">
-            @if(Request::segment(1) =='')
+            @if(Request::segment(1) == $segment && $user->my_theme =='1')
             @include('rightviews.fanduCommon')
-            @elseif(Request::segment(1) =='vineet-agarwala')
+            @elseif(Request::segment(1) == $segment && $user->my_theme =='2')
             @include('rightviews.vineetCommon')
-            @elseif(Request::segment(1) =='kamal-kalra')
+            @elseif(Request::segment(1) == $segment  && $user->my_theme =='3')
             @include('rightviews.kamalCommon')
             @else
             @include('rightviews.fanduCommon')

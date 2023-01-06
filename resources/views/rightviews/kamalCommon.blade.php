@@ -1,5 +1,6 @@
 @section('title')
-<title>Kamal Kalra</title>
+<title>{{$user->name}}</title>
+
 @endsection
 
 

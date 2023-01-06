@@ -17,13 +17,7 @@ Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('
 Route::get('/create-your-own-site', [App\Http\Controllers\CommonController::class, 'createYourOwnSite'])->name('createYourOwnSite');
 Route::post('/submit-your-own-site', [App\Http\Controllers\CommonController::class, 'submitYourOwnSite'])->name('submitYourOwnSite');
 
-// Route::prefix('vineet-agarwala')->group(function () {
-//     Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('vineetwelcome');
-// });
-
-// Route::prefix('kamal-kalra')->group(function () {
-//     Route::get('/', [App\Http\Controllers\CommonController::class, 'index'])->name('kamalwelcome');
-// });
+Auth::routes();
 
 
 Route::get('/{segment}', [App\Http\Controllers\CommonController::class, 'index'])->name('commonwelcome');
@@ -55,6 +49,10 @@ Route::get('/{segment}/intrest-details/{id}', [App\Http\Controllers\HomeControll
 Route::post('/add-intrest', [App\Http\Controllers\HomeController::class, 'addIntrest'])->name('addIntrest');
 
 Route::post('/create-post', [App\Http\Controllers\PostController::class, 'createPost'])->name('createPost');
+Route::post('/submit-goals', [App\Http\Controllers\PostController::class, 'submitGoals'])->name('submitGoals');
+Route::post('/update-user_profile',[App\Http\Controllers\PostController::class,'updateUserProfile'])->name('updateUserProfile');
+Route::post('/delete-goal',[App\Http\Controllers\PostController::class,'deleteGoal'])->name('deleteGoal');
+
 Route::post('/send-comment', [App\Http\Controllers\CommentController::class, 'sendComment'])->name('sendComment');
 Route::get('/delete-comment', [App\Http\Controllers\CommentController::class, 'deletesComment'])->name('deletesComment');
 Route::post('/send-reply', [App\Http\Controllers\CommentController::class, 'sendReply'])->name('sendReply');
@@ -74,7 +72,6 @@ Route::post('/submit-contents', [App\Http\Controllers\MainController::class, 'su
 
 
 
-Auth::routes();
 
 
 

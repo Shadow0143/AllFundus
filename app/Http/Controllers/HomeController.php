@@ -41,12 +41,12 @@ class HomeController extends Controller
     {
 
         $segment                                                = request()->segment(1);
-        $userDetails                                            = User::select('id')->where('segment', $segment)->first();
+        $user                                                   = User::where('segment', $segment)->first();
         $intrests                                               = intrests::orderBy('id', 'desc')->get();
-        $myIntrest                                              = intrests::where('id', request()->segment(3))->where('created_by',$userDetails->id)->first();
+        $myIntrest                                              = intrests::where('id', request()->segment(3))->where('created_by',$user->id)->first();
         
 
-        return view('leftviews.intrestDetails')->with('intrests', $intrests)->with('myIntrest', $myIntrest);
+        return view('leftviews.intrestDetails')->with('intrests', $intrests)->with('myIntrest', $myIntrest)->with('user',$user)->with('segment',$segment);
     }
 
     public function addIntrest(Request $request)

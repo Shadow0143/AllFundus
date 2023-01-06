@@ -75,6 +75,15 @@ function intrestmodalremove() {
 
 }
 
+function usergoalmoal(){
+    $('#userGoals').modal('show');
+}
+
+function goalmodalemove(){
+    $('#userGoals').modal('hide');
+
+}
+
 
 
 
@@ -299,6 +308,90 @@ $(document).ready(function(e) {
 
 });
 
+
+$(".small_title").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        small_title: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+$(".small_description").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        small_description: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+function changepicmodal(){
+    $('#changePic').modal('show');
+}
+function profilepicmodalemove(){
+    $('#changePic').modal('hide');
+}
+
+
+$(document).on('click', '.delete_goal', function(e) {
+    e.preventDefault();
+    var goal_id = $(this).data('id');
+    swal({
+        title: 'Are you sure?',
+        text: "You won't delete this logo!",
+        icon: 'warning',
+        buttons: true,
+        buttonsStyling: false,
+        reverseButtons: true
+    }).then((confirm) => {
+        if (confirm) {
+
+            var formData = {
+                "_token": $('#token').val(),
+                id: goal_id ,
+            };
+
+
+            $.ajax({
+                type: "POST",
+                url: "/delete-goal",
+                data: { formData },
+                success: function(data) {
+                    swal({
+                        title: 'Success',
+                        text: "Deleted",
+                        icon: 'success',
+                        buttons: true,
+                        buttonsStyling: false,
+                        reverseButtons: true
+                    });
+                    $('#main_goal_div'+goal_id).hide();
+                }
+            });
+        }
+
+    });
+
+});
 
 
 

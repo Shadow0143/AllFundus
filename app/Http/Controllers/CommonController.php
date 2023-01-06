@@ -17,6 +17,8 @@ use App\Models\User;
 use App\Models\Tags;
 use Modules\VineetAgarwalaFandu\Entities\Intrests;
 use App\Models\Contents;
+use App\Models\UserDetails;
+use App\Models\UserGoals;
 
 class CommonController extends Controller
 {
@@ -24,44 +26,54 @@ class CommonController extends Controller
     {
 
         $segment                                            = request()->segment(1);
-        $user                                               = User::select('id')->where('segment', $segment)->first();
-        $post                                               = Post::where('status', '1')->where('created_by', $user->id)->orderBy('posts.created_at', 'DESC')->paginate(2);
+        $user                                               = User::where('segment',$segment)->first();
+        if($user){
+            $post                                           = Post::where('status', '1')->where('created_by', $user->id)->orderBy('posts.created_at', 'DESC')->paginate(2);
 
-        foreach ($post as $key => $val) {
-            $comments                                       = Comment::where('post_id', $val->id)->count('comments');
-            $likes                                          = Likes::where('post_id', $val->id)->count('likes');
+            foreach ($post as $key => $val) {
+                $comments                                       = Comment::where('post_id', $val->id)->count('comments');
+                $likes                                          = Likes::where('post_id', $val->id)->count('likes');
+                if (Auth::user()) {
+                    $likeExist                                  = Likes::where('post_id', $val->id)->where('user_id', Auth::user()->id)->first();
+                } else {
+                    $likeExist                                  = '';
+                }
 
-            if (Auth::user()) {
-                $likeExist                                  = Likes::where('post_id', $val->id)->where('user_id', Auth::user()->id)->first();
-            } else {
-                $likeExist                                  = '';
+                $all_comments                                   = Comment::where('post_id', $val->id)->orderBy('id', 'desc')->get();
+                $post[$key]->total_comment                      = $comments;
+                $post[$key]->all_comments                       = $all_comments;
+                $post[$key]->likes                              = $likes;
+                $post[$key]->likeExist                          = $likeExist;
+
+                foreach ($all_comments as $key2 => $comm) {
+                    $reply                                      = Replys::where('comment_id', $comm->id)->orderBy('id', 'desc')->get();
+                    $all_comments[$key2]->all_reply             = $reply;
+                }
+
+                $post[$key]->tags                               = json_decode($val->tag, true);
+                $post[$key]->categ                              = json_decode($val->category, true);
+
+                $post_image                                     = postImages::where('post_id', $val->id)->get();
+                $post[$key]->post_image                         = $post_image;
             }
 
-            $all_comments                                   = Comment::where('post_id', $val->id)->orderBy('id', 'desc')->get();
-            $post[$key]->total_comment                      = $comments;
-            $post[$key]->all_comments                       = $all_comments;
-            $post[$key]->likes                              = $likes;
-            $post[$key]->likeExist                          = $likeExist;
+            $intrests                                       = Intrests::where('created_by', $user->id)->orderBy('id', 'desc')->get();
+            $usersDetails                                   = UserDetails::where('created_by',$user->id)->first();
+            $usergoals                                      = UserGoals::where('created_by',$user->id)->get();
+    
 
-            foreach ($all_comments as $key2 => $comm) {
-                $reply                                      = Replys::where('comment_id', $comm->id)->orderBy('id', 'desc')->get();
-                $all_comments[$key2]->all_reply             = $reply;
-            }
-
-            $post[$key]->tags                               = json_decode($val->tag, true);
-            $post[$key]->categ                              = json_decode($val->category, true);
-
-            $post_image                                     = postImages::where('post_id', $val->id)->get();
-            $post[$key]->post_image                         = $post_image;
+        }
+        else{
+            $post                                           = [];
+            $intrests                                       = [];
+            $usersDetails                                   = [];
+            $usergoals                                      = [];
         }
 
         $content                                            = Contents::orderBy('id', 'desc')->first();
         $testimonials                                       = Testimonial::orderBy('id', 'desc')->get();
         $tags                                               = Tags::select('id', 'type', 'name')->where('type', 'tag')->orderBy('id', 'desc')->get();
         $category                                           = Tags::select('id', 'type', 'name')->where('type', 'category')->orderBy('id', 'desc')->get();
-        $intrests                                           = Intrests::orderBy('id', 'desc')->get();
-
-
         $section                                            = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
         $data                                               = [];
         foreach ($section as $sec) {
@@ -71,6 +83,7 @@ class CommonController extends Controller
         }
 
         $array                                              = json_decode(json_encode($data), true);
+
 
         if ($request->ajax()) {
             if(count($post)>0){
@@ -83,7 +96,7 @@ class CommonController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('data', $array)->with('user', $user);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('data', $array)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals);
 
     }
 
