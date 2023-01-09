@@ -96,15 +96,7 @@ class HomeController extends Controller
             $type                                               = request()->segment(2);
             $userDetails                                        = User::select('id')->where('segment', null)->first();
         }
-        $section                                                = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                                   = [];
-        foreach ($section as $sec) {
-            $Section_item                                       = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                                  = $Section_item;
-            array_push($data, $sec);
-        }
-        $array                                                  = json_decode(json_encode($data), true);
-
+     
         $content                                                = Contents::orderBy('id', 'desc')->first();
 
         $testimonials                                           = Testimonial::orderBy('id', 'desc')->get();
@@ -144,7 +136,7 @@ class HomeController extends Controller
         $category                                               = Tags::where('type', 'category')->orderBy('id', 'desc')->get();
         $intrests                                               = Intrests::orderBy('id', 'desc')->get();
 
-        return view('welcome')->with('data', $array)->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
     }
 
     public function filterByTag($type)
@@ -159,14 +151,7 @@ class HomeController extends Controller
             $type                                               = request()->segment(2);
             $userDetails                                        = User::select('id')->where('segment', null)->first();
         }
-        $section                                                = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                                   = [];
-        foreach ($section as $sec) {
-            $Section_item                                       = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                                  = $Section_item;
-            array_push($data, $sec);
-        }
-        $array                                                  = json_decode(json_encode($data), true);
+        
 
         $content                                                = Contents::orderBy('id', 'desc')->first();
 
@@ -208,7 +193,7 @@ class HomeController extends Controller
         $category                                               = Tags::where('type', 'category')->orderBy('id', 'desc')->get();
         $intrests                                               = Intrests::orderBy('id', 'desc')->get();
 
-        return view('welcome')->with('data', $array)->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
     }
 
     public function filterByCategory($type)
@@ -222,16 +207,6 @@ class HomeController extends Controller
             $type                                               = request()->segment(2);
             $userDetails                                        = User::select('id')->where('segment', null)->first();
         }
-
-        // dd($userDetails);
-        $section                                                = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                                   = [];
-        foreach ($section as $sec) {
-            $Section_item                                       = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                                  = $Section_item;
-            array_push($data, $sec);
-        }
-        $array                                                  = json_decode(json_encode($data), true);
 
         $content                                                = Contents::orderBy('id', 'desc')->first();
 
@@ -273,7 +248,7 @@ class HomeController extends Controller
         $intrests                                               = Intrests::orderBy('id', 'desc')->get();
 
 
-        return view('welcome')->with('data', $array)->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
     }
 
     public function deletePost(Request $request)

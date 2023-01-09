@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\postImages;
+use App\Models\Section;
 use App\Models\Intrests;
 use RealRashid\SweetAlert\Facades\Alert;
 use Image;
@@ -218,5 +219,69 @@ class MainController extends Controller
         $content                                                = Contents::orderBy('id', 'desc')->first();
         $testimonials                                           = Testimonial::orderBy('id', 'desc')->get();
         return view('blogs', compact('posts', 'testimonials', 'content'));
+    }
+
+    public function submitNewSection(Request $request){
+            // dd($request->all());
+            if(!empty($request->id)){
+                $username                                           = Auth::user()->name;
+                $newSegment                                         = strtolower($username);
+                $segment                                            = str_replace(' ','-',$newSegment);
+                $section                                            = Section::find($request->id);
+                $section->title                                     = $request->sectiontitle;                                           
+                $section->sub_title                                 = $request->sectionsubtitle;                                           
+                $section->description                               = $request->description;                                           
+                
+                if (!empty($request->file('sectionimage'))) {
+                    $profile                                        = $request->file('sectionimage');
+                    $userphoto                                      = $segment .'-sectionimg-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                    $result                                         = public_path('section_images');
+                    $profile->move($result, $userphoto);
+                    $section->image                                 = $userphoto;
+                }
+    
+                $section->sequence                                  = $request->secquence;                                           
+                $section->link                                      = $request->sectionlink;    
+                $section->save();    
+    
+                Alert::success('Success','Updated');
+            }else{
+                $username                                           = Auth::user()->name;
+                $newSegment                                         = strtolower($username);
+                $segment                                            = str_replace(' ','-',$newSegment);
+                $section                                            = new Section();
+                $section->title                                     = $request->sectiontitle;                                           
+                $section->sub_title                                 = $request->sectionsubtitle;                                           
+                $section->description                               = $request->description;                                           
+                
+                if (!empty($request->file('sectionimage'))) {
+                    $profile                                        = $request->file('sectionimage');
+                    $userphoto                                      = $segment .'-sectionimg-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                    $result                                         = public_path('section_images');
+                    $profile->move($result, $userphoto);
+                    $section->image                                 = $userphoto;
+                }
+    
+                $section->sequence                                  = $request->secquence;                                           
+                $section->created_by                                = Auth::user()->id;                                           
+                $section->link                                      = $request->sectionlink;    
+                $section->save();    
+    
+                Alert::success('Success','Added');
+            }
+           
+            return back();
+    }    
+    
+    public function deleteNewSection(Request $request){
+        $delete                                                 = Section::find($request->id);
+                                                                unlink('section_images/'.$delete->image);
+        $delete->delete();
+        return back();
+    }
+
+    public function editNewSection(Request $request){
+        $edit                                                   = Section::find($request->id);
+        return $edit;
     }
 }

@@ -59,7 +59,8 @@ class CommonController extends Controller
             $intrests                                       = Intrests::where('created_by', $user->id)->orderBy('id', 'desc')->get();
             $usersDetails                                   = UserDetails::where('created_by',$user->id)->first();
             $usergoals                                      = UserGoals::where('created_by',$user->id)->get();
-    
+            $extraSections                                  = Section::where('created_by',$user->id)->orderBy('sequence','asc')->get();
+            // dd($extraSections);
 
         }
         else{
@@ -67,6 +68,8 @@ class CommonController extends Controller
             $intrests                                       = [];
             $usersDetails                                   = [];
             $usergoals                                      = [];
+            $extraSections                                  = [];
+            
         }
 
         $content                                            = Contents::orderBy('id', 'desc')->first();
@@ -85,7 +88,7 @@ class CommonController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals)->with('extraSections',$extraSections);
 
     }
 
@@ -156,13 +159,13 @@ class CommonController extends Controller
     public function submitYourOwnSite(Request $request)
     {
         // dd($request->all());
-        $username = Auth::user()->name;
-        $newSegment = strtolower($username);
-        $segment = str_replace(' ','-',$newSegment);
-        $themeselected = User::find(Auth::user()->id);
-        $themeselected->role = 'owner';
-        $themeselected->segment = $segment;
-        $themeselected->my_theme = $request->selected_theme;
+        $username                                           = Auth::user()->name;
+        $newSegment                                         = strtolower($username);
+        $segment                                            = str_replace(' ','-',$newSegment);
+        $themeselected                                      = User::find(Auth::user()->id);
+        $themeselected->role                                = 'owner';
+        $themeselected->segment                             = $segment;
+        $themeselected->my_theme                            = $request->selected_theme;
         $themeselected->save();
         return redirect('/'.$segment);
     }

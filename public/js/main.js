@@ -14,7 +14,7 @@ function likes(postid) {
     $.ajax({
         type: "GET",
         // url: "{{route('likes')}}",
-        url: "/post-likes",
+        url: "post/likes",
         data: {
             postid: postid
         },
@@ -42,7 +42,7 @@ function deleteComment(ids) {
     $.ajax({
         type: "GET",
         // url: "{{route('deletesComment')}}",
-        url: "/delete-comment",
+        url: "delete-comment",
         data: {
             comment_id: comment_id
         },
@@ -103,7 +103,7 @@ $(document).on('click', '.btn_remove_post', function(e) {
             $.ajax({
                 type: "GET",
                 // url: "{{route('deletePost')}}",
-                url: "/delete-post",
+                url: "delete/post",
                 data: { id: post_id },
                 success: function(data) {
                     swal({
@@ -443,10 +443,45 @@ $(".book_summary").blur(function(event) {
 });
 
 
+$(document).on('click', '.deletesection', function(e) {
+    e.preventDefault();
+    var content_id = $(this).data('id');
+    swal({
+        title: 'Are you sure?',
+        text: "You won't delete this section!",
+        icon: 'warning',
+        buttons: true,
+        buttonsStyling: false,
+        reverseButtons: true
+    }).then((confirm) => {
+        if (confirm) {
+            $.ajax({
+                type: "GET",
+                url: "delete/new-section",
+                data: { id: content_id },
+                success: function(data) {
+                    swal({
+                        title: 'Success',
+                        text: "Deleted",
+                        icon: 'success',
+                        buttons: true,
+                        buttonsStyling: false,
+                        reverseButtons: true
+                    });
+                    $('#removesection' + content_id).hide();
+                }
+            });
+        }
+
+    });
+
+});
+
 
 function changepicmodal(){
     $('#changePic').modal('show');
 }
+
 function profilepicmodalemove(){
     $('#changePic').modal('hide');
 }
@@ -481,7 +516,7 @@ $(document).on('click', '.delete_goal', function(e) {
 
             $.ajax({
                 type: "POST",
-                url: "/delete-goal",
+                url: "delete-goal",
                 data: { formData },
                 success: function(data) {
                     swal({
@@ -544,7 +579,32 @@ $('#links').on('change',function(){
     }
 });
 
+function addnewsection(){
+    $('#addsectionmodal').modal('show');
+}
+function closesectionmodal(){
+    $('#addsectionmodal').modal('hide');
+}
 
+$('.editsection').on('click',function(){
+    var id = $(this).data('id');
+    $.ajax({
+        url : 'edit/new-section',
+        type : 'GET',
+        data : {
+            id:id,
+        },
+        success:function(data){
+            $('#sectionid').val(data.id);
+            $('#sectiontitle').val(data.title);
+            $('#sectionsubtitle').val(data.sub_title);
+            CKEDITOR.instances['sectiontextarea'].setData(data.description);
+            $('#sectionlink').val(data.link);
+            $('#secquence').val(data.sequence);
+            $('#addsectionmodal').modal('show');
+        }
+    })
+});
 
 
 //========================= Below js is use for kamalk kalra theme (only), still not in  use =======================================

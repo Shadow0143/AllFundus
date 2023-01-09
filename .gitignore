@@ -5,6 +5,7 @@
 /public/userGoals
 /public/user_profiles
 /public/user_books
+/public/section_images
 /storage/*.key
 /vendor
 .env

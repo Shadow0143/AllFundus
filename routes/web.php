@@ -57,8 +57,8 @@ Route::post('/send-comment', [App\Http\Controllers\CommentController::class, 'se
 Route::get('/delete-comment', [App\Http\Controllers\CommentController::class, 'deletesComment'])->name('deletesComment');
 Route::post('/send-reply', [App\Http\Controllers\CommentController::class, 'sendReply'])->name('sendReply');
 Route::post('/submit-tag', [App\Http\Controllers\MainController::class, 'submitTag'])->name('submitTag');
-Route::get('/post-likes', [App\Http\Controllers\HomeController::class, 'likes'])->name('likes');
-Route::get('/delete-post', [App\Http\Controllers\HomeController::class, 'deletePost'])->name('deletePost');
+Route::get('/post/likes', [App\Http\Controllers\HomeController::class, 'likes'])->name('likes');
+Route::get('/delete/post', [App\Http\Controllers\HomeController::class, 'deletePost'])->name('deletePost');
 Route::post('/submit-testimonial', [App\Http\Controllers\MainController::class, 'submitTestimonial'])->name('submitTestimonial');
 Route::post('/submit-contents', [App\Http\Controllers\MainController::class, 'submitContents'])->name('submitContents');
 
@@ -93,3 +93,7 @@ Route::get('/read-about-us', [App\Http\Controllers\MainController::class, 'readA
 Route::get('/why-me', [App\Http\Controllers\MainController::class, 'whyMe'])->name('whyMe');
 Route::get('/blogs', [App\Http\Controllers\MainController::class, 'blogs'])->name('blogs');
 Route::get('/our-sites', [App\Http\Controllers\MainController::class, 'ourSites'])->name('ourSites');
+
+Route::post('/submit-new-section', [App\Http\Controllers\MainController::class, 'submitNewSection'])->name('submitNewSection');
+Route::get('/edit/new-section', [App\Http\Controllers\MainController::class, 'editNewSection'])->name('editNewSection');
+Route::get('/delete/new-section', [App\Http\Controllers\MainController::class, 'deleteNewSection'])->name('deleteNewSection');

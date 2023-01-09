@@ -115,16 +115,38 @@
             @else
             @include('rightviews.fanduCommon')
             @endif
+
+
+            <!-------- Extra Sections Start------->
+                @foreach ( $extraSections as $key=>$value) 
+                    <div class="col-12" id="removesection{{$value->id}}">
+
+                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            <a href="javaScript:void(0);" title="Edit" class="editsection" data-id="{{$value->id}}">Edit</a>
+                            <a href="javaScript:void(0);" title="Delete" class="deletesection" data-id="{{$value->id}}">X</a>
+                        @endif
+                        <h1>{{$value->title}}</h1>
+                        <h3>{{$value->sub_title}}</h3>
+                        <img src="{{asset('section_images')}}/{{$value->image}}" alt="{{$value->image}}" height="600px">
+                        <a href="{{$value->link}}" target="_blank">Link</a>
+                        <p>{!! $value->description !!}</p>
+                        <p>
+                        </p>
+                    </div>
+                @endforeach
+            <!-------- Extra Sections End------->
+
+
         </div>
     </div>
 </div>
 
-@if(Auth::check() && Auth::user()->role=='owner' && Auth::user()->my_theme ==null)
-    <a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
-@elseif(Auth::check() && Auth::user()->role=='owner' &&  Auth::user()->my_theme !=null )
+
+@guest()
+<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
 @else
-    <a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
-@endif
+<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
+@endguest
 
 
 @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
@@ -134,6 +156,7 @@
 <button class=" btn btn-outline-warning testimonial_btn mr-2" onclick="opentestimonialForm()">Testimonial</button><br>
 <button class="btn btn-outline-dark right_btn" onclick="rightContentForm()">Right Content</button>
 <button class=" btn btn-outline-primary " onclick="tagsCategory()">Tags & category</button>
+<button class=" btn btn-outline-primary " onclick="addnewsection()">Add New Section</button>
 
 <div class="modal fade pw_modal" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -223,49 +246,11 @@
                                 onclick="removeImage()">Remove Image</a>
                         </div>
                     </div>
-                    {{-- <ul class="uploaded_img">
-                        <li>
-                            <img src="https://personal-website.iudyog.com/images/profile.jpg" alt="">
-                            <button class="remove_img">
-                                <i class="ti-close" aria-hidden="true"></i>
-                            </button>
-                        </li>
-                        <li>
-                            <img src="https://personal-website.iudyog.com/images/profile.jpg" alt="">
-                            <button class="remove_img">
-                                <i class="ti-close" aria-hidden="true"></i>
-                            </button>
-                        </li>
-                        <li>
-                            <img src="https://personal-website.iudyog.com/images/profile.jpg" alt="">
-                            <button class="remove_img">
-                                <i class="ti-close" aria-hidden="true"></i>
-                            </button>
-                        </li>
-                    </ul> --}}
+                  
                 </div>
                 <div class="publish_post text-center mb-3 mt-2">
                     <button class="publish_post btn btn-outline-primary ">Publish</button>
                 </div>
-
-                {{-- <div class="modal fade" id="post_Image" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" id="">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Select Images</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                    onclick="closemodal()">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="file" name="post_image[]" id="post_image" class="form-control" multiple>
-                            </div>
-
-                        </div>
-                    </div>
-                </div> --}}
             </form>
         </div>
     </div>
@@ -573,6 +558,58 @@
 </div>
 
 
+<div class="modal fade pw_modal" id="addsectionmodal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{route('submitNewSection')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Section</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closesectionmodal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="sectionid" value="">
+                    <div id="" name="">
+                        
+                        <div class="fieldrow">
+                            <input type="text" placeholder="Title" name="sectiontitle" class="form-control" required
+                                id="sectiontitle" />
+                        </div>
+
+                        <div class="fieldrow">
+                            <input type="text" placeholder="Subtitle" name="sectionsubtitle" class="form-control" id="sectionsubtitle" />
+                        </div>
+                        <div class="fieldrow">
+                            <input type="file" name="sectionimage" id="sectionimage" class="form-control">
+                        </div>
+                        <textarea id="sectiontextarea" name="description" class="form-control" required></textarea>
+
+                        <div class="fieldrow mt-2">
+                            <input type="link" name="sectionlink" id="sectionlink" class="form-control" placeholder="Any Link">
+                        </div>
+
+                        <div class="fieldrow">
+                            <input type="number" name="secquence" id="secquence" class="form-control" placeholder="Secquence">
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">ADD</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 @endif
 
 @if(!Auth::user())
@@ -655,6 +692,7 @@
 
 <script>
     CKEDITOR.replace('editor1');
+    CKEDITOR.replace('sectiontextarea');
 </script>
 
 <script>
@@ -760,5 +798,6 @@
             jQuery(".mobileHeader").slideUp();
         });
 </script>
+
 
 @endsection

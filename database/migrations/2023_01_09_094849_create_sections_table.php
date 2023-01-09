@@ -17,10 +17,10 @@ class CreateSectionsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('sub_title')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('sequence')->nullable();
-            $table->string('created_by')->nullable();
+            $table->integer('sequence')->nullable();
+            $table->integer('created_by')->nullable();
             $table->string('link')->nullable();
             
             $table->timestamps();
