@@ -158,15 +158,14 @@ class CommonController extends Controller
 
     public function submitYourOwnSite(Request $request)
     {
-        // dd($request->all());
         $username                                           = Auth::user()->name;
         $newSegment                                         = strtolower($username);
         $segment                                            = str_replace(' ','-',$newSegment);
-        $themeselected                                      = User::find(Auth::user()->id);
-        $themeselected->role                                = 'owner';
-        $themeselected->segment                             = $segment;
-        $themeselected->my_theme                            = $request->selected_theme;
-        $themeselected->save();
+        $user                                               = User::find(Auth::user()->id);
+        $user->role                                         = 'owner';
+        $user->segment                                      = $segment;
+        $user->my_theme                                     = $request->selected_theme;
+        $user->save();
         return redirect('/'.$segment);
     }
 }

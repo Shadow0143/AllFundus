@@ -598,7 +598,7 @@
 
                 </div>
                 <div class="publish_post text-center mb-3 mt-2">
-                    <button class="publish_post btn btn-outline-primary ">ADD</button>
+                    <button class="publish_post btn btn-outline-primary ">Save</button>
                 </div>
 
 
