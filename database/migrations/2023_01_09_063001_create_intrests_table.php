@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateIntrestsTable extends Migration
 {
@@ -15,9 +15,9 @@ class CreateIntrestsTable extends Migration
     {
         Schema::create('intrests', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('subtitle');
-            $table->longText('description');
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('created_by')->nullable();
             $table->timestamps();
         });

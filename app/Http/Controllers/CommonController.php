@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Section;
 use App\Models\Post;
-use App\Models\Section_item;
 use Illuminate\Support\Facades\Http;
 use App\Models\Comment;
 use App\Models\Replys;
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Models\Tags;
-use Modules\VineetAgarwalaFandu\Entities\Intrests;
+use App\Models\Intrests;
 use App\Models\Contents;
 use App\Models\UserDetails;
 use App\Models\UserGoals;
@@ -74,17 +73,7 @@ class CommonController extends Controller
         $testimonials                                       = Testimonial::orderBy('id', 'desc')->get();
         $tags                                               = Tags::select('id', 'type', 'name')->where('type', 'tag')->orderBy('id', 'desc')->get();
         $category                                           = Tags::select('id', 'type', 'name')->where('type', 'category')->orderBy('id', 'desc')->get();
-        $section                                            = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                               = [];
-        foreach ($section as $sec) {
-            $Section_item                                   = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                              = $Section_item;
-            array_push($data, $sec);
-        }
-
-        $array                                              = json_decode(json_encode($data), true);
-
-
+       
         if ($request->ajax()) {
             if(count($post)>0){
                 $view                                       = view('leftviews.commonleft',compact('post','content','testimonials','tags','category','intrests','array','user'))->render();
@@ -96,7 +85,7 @@ class CommonController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('data', $array)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals);
 
     }
 
@@ -111,16 +100,7 @@ class CommonController extends Controller
         $tags                                               = Tags::where('type', 'tag')->orderBy('id', 'desc')->get();
         $category                                           = Tags::where('type', 'category')->orderBy('id', 'desc')->get();
         $intrests                                           = Intrests::orderBy('id', 'desc')->get();
-        $section                                            = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                               = [];
-        foreach ($section as $sec) {
-            $Section_item                                   = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                              = $Section_item;
-            array_push($data, $sec);
-        }
-
-        $array                                              = json_decode(json_encode($data), true);
-
+       
         // =========================== Right section end=========================================
 
         // =========================== left details section start=====================================
@@ -165,7 +145,7 @@ class CommonController extends Controller
         // =========================== left details section end=======================================
 
 
-        return view('leftviews.moreDetails')->with('data', $array)->with('post', $post_data)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
+        return view('leftviews.moreDetails')->with('post', $post_data)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests);
     }
 
     public function createYourOwnSite()
@@ -175,8 +155,10 @@ class CommonController extends Controller
 
     public function submitYourOwnSite(Request $request)
     {
+        // dd($request->all());
         $username = Auth::user()->name;
-        $segment = str_replace(' ','-',$username);
+        $newSegment = strtolower($username);
+        $segment = str_replace(' ','-',$newSegment);
         $themeselected = User::find(Auth::user()->id);
         $themeselected->role = 'owner';
         $themeselected->segment = $segment;

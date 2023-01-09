@@ -467,7 +467,7 @@ body {
 
 .myProSec h5 {
     font-size: 18px;
-    color: #fff;
+    color: black;
     position: relative;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -476,7 +476,7 @@ body {
 
 .myProSec p {
     font-size: 18px;
-    color: #fff;
+    color: black;
     margin-bottom: 20px;
 }
 

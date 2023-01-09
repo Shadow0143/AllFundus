@@ -24,6 +24,12 @@ class CreateUserDetailsTable extends Migration
             $table->string('youtube_link')->nullable();
             $table->string('whatsapp_number')->nullable();
             $table->string('theme_color')->nullable();
+            $table->string('biography_description')->nullable();
+            $table->string('book_title')->nullable();
+            $table->string('book_name')->nullable();
+            $table->string('book_small_desc')->nullable();
+            $table->string('book_image')->nullable();
+            $table->string('book_summary')->nullable();
             $table->integer('created_by')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -14,9 +14,10 @@ use App\Models\Likes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Testimonial;
 use App\Models\Contents;
-use Modules\VineetAgarwalaFandu\Entities\Intrests;
+use App\Models\Intrests;
 use App\Models\Tags;
 use App\Models\User;
+use App\Models\UserDetails;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
 
@@ -27,11 +28,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
+  
     /**
      * Show the application dashboard.
      *
@@ -61,14 +58,6 @@ class HomeController extends Controller
         return back();
     }
 
-    public function editSection(Request $request)
-    {
-        // dd($request->all());
-        $update                                                 = Section_item::find($request->id);
-        $update->section_item_value                             = $request->value;
-        $update->save();
-        return back();
-    }
 
 
     public function likes(Request $request)
@@ -86,21 +75,13 @@ class HomeController extends Controller
 
     public function biographyDetails()
     {
-        // =========================== Right section start=====================================
-
-        $section                                                = Section::where('status', 'active')->orderBy('sequence', 'ASC')->get();
-        $data                                                   = [];
-        foreach ($section as $sec) {
-            $Section_item                                       = Section_item::select('id', 'section_item_name', 'section_item_value')->where('status', 'active')->where('section_id', $sec->id)->orderBy('sequence', 'ASC')->get();
-            $sec->section_item                                  = $Section_item;
-            array_push($data, $sec);
-        }
-        $array                                                  = json_decode(json_encode($data), true);
-
-        // =========================== Right section end=========================================
-
-
-        return view('rightviews.biography_details')->with('data', $array);
+        $segment                                                = request()->segment(1);
+        $user                                                   = User::where('segment', $segment)->first();
+        $biographydetail                                        = UserDetails::select('biography_description')->where('created_by',$user->id)
+        ->first();
+        $usersDetails                                           = UserDetails::where('created_by',$user->id)->first();
+        
+        return view('leftviews.biography_details')->with('biographydetail', $biographydetail)->with('user',$user)->with('segment',$segment)->with('usersDetails',$usersDetails);
     }
 
     public function filterByposts($type)

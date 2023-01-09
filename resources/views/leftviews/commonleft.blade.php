@@ -6,7 +6,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 embeded_post " id="main_post_div{{$post->id}}">
                 <div class="post_remove">
                     <span class="post_date">{{date('d F Y',strtotime($post->created_at))}}</span>
-                    @if(Auth::user() && Auth::user()->role=='owner')
+                    @if(Auth::user() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
                         <a href="javaScript:void(0);" class="btn_remove_post" data-id="{{$post->id}}"><i
                             class="ti-close"></i></a>
                     @endif

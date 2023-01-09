@@ -63,6 +63,7 @@ Route::post('/submit-testimonial', [App\Http\Controllers\MainController::class, 
 Route::post('/submit-contents', [App\Http\Controllers\MainController::class, 'submitContents'])->name('submitContents');
 
 
+Route::get('/{segment}/biography-details', [App\Http\Controllers\HomeController::class, 'biographyDetails'])->name('biographyDetails');
 
 
 

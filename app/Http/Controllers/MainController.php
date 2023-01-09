@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\postImages;
-use Modules\VineetAgarwalaFandu\Entities\Intrests;
+use App\Models\Intrests;
 use RealRashid\SweetAlert\Facades\Alert;
 use Image;
 use App\Models\Testimonial;

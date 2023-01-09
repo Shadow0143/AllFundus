@@ -94,6 +94,9 @@ class PostController extends Controller
     public function updateUserProfile(Request $request){
 
         $userExist                                                  = UserDetails::where('user_id',Auth::user()->id)->first();
+        $username                                                   = Auth::user()->name;
+        $newSegment                                                 = strtolower($username);
+        $segment                                                    = str_replace(' ','-',$newSegment);
         if($userExist){
             $updateEntry                                            = UserDetails::find($userExist->id);
             if(!empty($request->small_title)){
@@ -105,7 +108,7 @@ class PostController extends Controller
 
             if (!empty($request->file('user_profile'))) {
                 $profile                                            = $request->file('user_profile');
-                $userphoto                                          = Auth::user()->name .'-profilepic-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $userphoto                                          = $segment .'-profilepic-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
                 $result                                             = public_path('user_profiles');
                 $profile->move($result, $userphoto);
                 $updateEntry->user_profile                          = $userphoto;
@@ -122,6 +125,30 @@ class PostController extends Controller
             if(!empty($request->whatsapp_number)){
                 $updateEntry->whatsapp_number                       = $request->whatsapp_number;
             }
+
+            if(!empty($request->biography_description)){
+                $updateEntry->biography_description                 = $request->biography_description;
+            }
+            
+            if(!empty($request->book_title)){
+                $updateEntry->book_title                            = $request->book_title;
+            }
+            if(!empty($request->book_name)){
+                $updateEntry->book_name                             = $request->book_name;
+            }
+            if(!empty($request->book_small_desc)){
+                $updateEntry->book_small_desc                       = $request->book_small_desc;
+            }
+            if (!empty($request->file('book_image'))) {
+                $profile                                            = $request->file('book_image');
+                $userbookphoto                                      = $segment  .'-book-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $result                                             = public_path('user_books');
+                $profile->move($result, $userbookphoto);
+                $updateEntry->book_image                            = $userbookphoto;
+            }
+            if(!empty($request->book_summary)){
+                $updateEntry->book_summary                          = $request->book_summary;
+            }
             
             $updateEntry->save();
 
@@ -133,7 +160,7 @@ class PostController extends Controller
 
             if (!empty($request->file('user_profile'))) {
                 $profile                                            = $request->file('user_profile');
-                $userphoto                                          = Auth::user()->name .'-profilepic-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $userphoto                                          = $segment .'-profilepic-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
                 $result                                             = public_path('user_profiles');
                 $profile->move($result, $userphoto);
                 $newEntry->user_profile                             = $userphoto;
@@ -143,6 +170,19 @@ class PostController extends Controller
             $newEntry->insta_link                                   = $request->insta_link;
             $newEntry->youtube_link                                 = $request->youtube_link;
             $newEntry->whatsapp_number                              = $request->whatsapp_number;
+            $newEntry->biography_description                        = $request->biography_description;
+            $newEntry->book_title                                   = $request->book_title;
+            $newEntry->book_name                                    = $request->book_name;
+            $newEntry->book_small_desc                              = $request->book_small_desc;
+
+            if (!empty($request->file('book_image'))) {
+                $profile                                            = $request->file('book_image');
+                $userbookphoto                                      = $segment  .'-book-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $result                                             = public_path('user_books');
+                $profile->move($result, $userbookphoto);
+                $newEntry->book_image                               = $userbookphoto;
+            }
+            $newEntry->book_summary                                 = $request->book_summary;
             $newEntry->created_by                                   = Auth::user()->id;
             $newEntry->save();
         }

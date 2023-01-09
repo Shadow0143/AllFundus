@@ -119,12 +119,11 @@
     </div>
 </div>
 
-@if(Auth::check() && Auth::user()->role=='owner')
-
-@elseif(Auth::check())
-<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
+@if(Auth::check() && Auth::user()->role=='owner' && Auth::user()->my_theme ==null)
+    <a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
+@elseif(Auth::check() && Auth::user()->role=='owner' &&  Auth::user()->my_theme !=null )
 @else
-<a href="javaScript:void(0);" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
+    <a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
 @endif
 
 
@@ -487,6 +486,78 @@
                     <div id="user_profile" name="user_profile">
                         <div class="fieldrow">
                             <input type="file" placeholder="" name="user_profile" requird  class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Change</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade pw_modal" id="changeBookmodal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Image</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="changebookmodalremove()">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="user_profile" name="user_profile">
+                        <div class="fieldrow">
+                            <input type="file" placeholder="" name="book_image" requird  class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Change</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade pw_modal" id="changeLinks" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Links</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="changelinksmodalemove()">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="goal" name="goal">
+                        <div class="fieldrow">
+                            <select name="links" id="links" class="form-control" required>
+                                <option value="insta_link">Instagram</option>
+                                <option value="fb_link">Facebook</option>
+                                <option value="youtube_link">Youtube</option>
+                                <option value="whatsapp_number">Whatsapp</option>
+                            </select>
+                        </div>
+                        <div class="fieldrow">
+                            <input type="text" placeholder="Instagram Link" name="insta_link"  id="insta_link" class="form-control" />
+                            <input type="text" placeholder="Facebook Link" name="fb_link" id="fb_link"  class="form-control" />
+                            <input type="text" placeholder="Youtube Link" name="youtube_link"  id="youtube_link" class="form-control" />
+                            <input type="number" placeholder="Whatsapp Number" name="whatsapp_number" id="whatsapp_number"  class="form-control" />
                         </div>
                     </div>
 

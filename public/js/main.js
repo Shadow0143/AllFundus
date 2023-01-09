@@ -201,7 +201,6 @@ function submitForm(id) {
 
     $("#commet_form" + id).submit(function(event) {
         var formData = {
-            // "_token": "{{ csrf_token() }}",
             comment_message: $("#comment_message" + id).val(),
             "_token": $("#token").val(),
             post_id: $("#post_new_id").val(),
@@ -326,6 +325,8 @@ $(".small_title").blur(function(event) {
         },
     });
 });
+
+
 $(".small_description").blur(function(event) {
 
     var formData = {
@@ -344,11 +345,118 @@ $(".small_description").blur(function(event) {
     });
 });
 
+
+$(".biography_description").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        biography_description: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+
+$(".book_title").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        book_title: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+
+
+$(".book_name").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        book_name: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+
+
+$(".book_small_desc").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        book_small_desc: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+
+$(".book_summary").blur(function(event) {
+
+    var formData = {
+        "_token": $('#token').val(),
+        book_summary: $(this).val() ,
+    };
+    $.ajax({
+        type: "POST",
+        url: "/update-user_profile",
+        data: formData,
+        dataType: "json",
+        encode: true,
+        success: function(res) {
+            alert('Save changes.');
+        },
+    });
+});
+
+
+
 function changepicmodal(){
     $('#changePic').modal('show');
 }
 function profilepicmodalemove(){
     $('#changePic').modal('hide');
+}
+
+
+function changebook(){
+    $('#changeBookmodal').modal('show');
+}
+function changebookmodalremove(){
+    $('#changeBookmodal').modal('hide');
 }
 
 
@@ -394,8 +502,47 @@ $(document).on('click', '.delete_goal', function(e) {
 });
 
 
+function changeLinksmodal()
+{
+    $('#changeLinks').modal('show');
+}	
+function changelinksmodalemove()
+{
+    $('#changeLinks').modal('hide');
+}	
 
-	
+$(document).ready(function(){
+    $('#fb_link').css('display','none');
+    $('#youtube_link').css('display','none');
+    $('#whatsapp_number').css('display','none');
+})
+
+
+$('#links').on('change',function(){
+    var value = $(this).val();
+    if(value =='insta_link'){
+        $('#insta_link').css('display','block');
+        $('#fb_link').css('display','none');
+        $('#youtube_link').css('display','none');
+        $('#whatsapp_number').css('display','none');
+    }else if( value== 'fb_link'){
+        $('#insta_link').css('display','none');
+        $('#fb_link').css('display','block');
+        $('#youtube_link').css('display','none');
+        $('#whatsapp_number').css('display','none');
+    }else if( value== 'youtube_link'){
+        $('#insta_link').css('display','none');
+        $('#fb_link').css('display','none');
+        $('#youtube_link').css('display','block');
+        $('#whatsapp_number').css('display','none');
+    }
+    else if( value== 'whatsapp_number'){
+        $('#insta_link').css('display','none');
+        $('#fb_link').css('display','none');
+        $('#youtube_link').css('display','none');
+        $('#whatsapp_number').css('display','block');
+    }
+});
 
 
 

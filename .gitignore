@@ -4,6 +4,7 @@
 /public/uploads
 /public/userGoals
 /public/user_profiles
+/public/user_books
 /storage/*.key
 /vendor
 .env

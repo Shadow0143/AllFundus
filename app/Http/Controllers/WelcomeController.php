@@ -14,6 +14,7 @@ use App\Models\Likes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Testimonial;
 use App\Models\Contents;
+use App\Models\Intrests;
 
 
 class WelcomeController extends Controller

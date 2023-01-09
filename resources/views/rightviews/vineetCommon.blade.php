@@ -68,6 +68,9 @@
                             <a href="@if(!empty($usersDetails->whatsapp_number)) https://wa.me/{{$usersDetails->whatsapp_number}} @endif" class="fa fa-whatsapp" target="_blank"></a>
                             <a href="@if(!empty($usersDetails->youtube_link)) {{$usersDetails->youtube_link}} @endif" class="fa fa-youtube-play" target="_blank"></a>
                         </div>
+                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            <a href="javaScript:void(0);" class="changeRelatedLinks" onclick="changeLinksmodal()"> Change related links</a>
+                        @endif
                     </div>
                 </div>
 
