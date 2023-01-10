@@ -6,8 +6,7 @@
     @if (Auth::check())
     <div class="header_login">
         <div class="header_inner">
-            <a href="" data-toggle="collapse" data-target="#demo"> Hi! 
-                {{ Auth::user()->name }}  
+            <a href="" data-toggle="collapse" data-target="#demo"> <img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->avatar}}" id="googleavatar"> {{ Auth::user()->name }}  
             <i
                     class="fa fa-angle-down"></i></a>
             <div id="demo" class="collapse header-clp">
@@ -90,6 +89,8 @@
                 @include('rightviews.vineetCommon')
                 @elseif(Request::segment(1) == $segment  && $user->my_theme =='3')
                 @include('rightviews.kamalCommon')
+                @elseif(Request::segment(1) == $segment  && $user->my_theme =='4')
+                @include('rightviews.theme4')
                 @else
                 @include('rightviews.fanduCommon')
                 @endif
@@ -112,6 +113,8 @@
             @include('rightviews.vineetCommon')
             @elseif(Request::segment(1) == $segment  && $user->my_theme =='3')
             @include('rightviews.kamalCommon')
+            @elseif(Request::segment(1) == $segment  && $user->my_theme =='4')
+            @include('rightviews.theme4')
             @else
             @include('rightviews.fanduCommon')
             @endif
@@ -119,11 +122,16 @@
 
             <!-------- Extra Sections Start------->
                 @foreach ( $extraSections as $key=>$value) 
-                    <div class="col-12" id="removesection{{$value->id}}">
+                    <div class="col-12 card mt-5" id="removesection{{$value->id}} ">
 
                         @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
-                            <a href="javaScript:void(0);" title="Edit" class="editsection" data-id="{{$value->id}}">Edit</a>
-                            <a href="javaScript:void(0);" title="Delete" class="deletesection" data-id="{{$value->id}}">X</a>
+                        <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                                <a href="javaScript:void(0);" title="Edit" class="editsection mt-5" data-id="{{$value->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="javaScript:void(0);" title="Delete" class="deletesection" data-id="{{$value->id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
                         @endif
                         <h1>{{$value->title}}</h1>
                         <h3>{{$value->sub_title}}</h3>
@@ -143,9 +151,9 @@
 
 
 @guest()
-<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
+    <a href="javaScript:void(0);" class="btn btn-outline-danger btn-sm" onclick="goolgelogin()"> Create your own site</a>
 @else
-<a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
+    <a href="{{route('createYourOwnSite')}}" class="btn btn-outline-danger btn-sm"> Create your own site</a>
 @endguest
 
 

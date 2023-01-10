@@ -480,6 +480,11 @@ body {
     margin-bottom: 20px;
 }
 
+#googleavatar{
+    border-radius: 50%;
+    height: 40px;
+}
+
 .myProSec a.rmore {
     font-size: 16px;
     color: #fff;

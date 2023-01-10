@@ -32,11 +32,11 @@
             @csrf
             <div class="col-12">
                 <div class="row  mt-5 ml-5">
-                    <div class="col-3 card ml-3">
+                    {{-- <div class="col-3 card ml-3">
                         <img src="{{asset('themes/theme1.png')}}" alt="Theme-1">
                         <label for="theme1"> Theme 1</label>
                         <input type="radio" name="selected_theme" id="theme1" value="1" checked class="m-2"> 
-                    </div>
+                    </div> --}}
                     <div class="col-3 card ml-3">
                         <img src="{{asset('themes/theme2.png')}}" alt="Theme-2">
                         <label for="theme2"> Theme 2</label>
