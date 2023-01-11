@@ -4,6 +4,14 @@ $(document).ready(function(e) {
 });
 
 
+function openPostForm() {
+    $('#myModal').modal('show');
+}
+function closepostform() {
+    $('#myModal').modal('hide');
+}
+
+
 function goolgelogin() {
     $('#loginwithgooglemodal').modal('show');
 }
@@ -83,9 +91,6 @@ function goalmodalemove(){
     $('#userGoals').modal('hide');
 
 }
-
-
-
 
 
 $(document).on('click', '.btn_remove_post', function(e) {
@@ -540,7 +545,8 @@ $(document).on('click', '.delete_goal', function(e) {
 function changeLinksmodal()
 {
     $('#changeLinks').modal('show');
-}	
+}
+
 function changelinksmodalemove()
 {
     $('#changeLinks').modal('hide');
@@ -582,6 +588,7 @@ $('#links').on('change',function(){
 function addnewsection(){
     $('#addsectionmodal').modal('show');
 }
+
 function closesectionmodal(){
     $('#addsectionmodal').modal('hide');
 }
@@ -605,6 +612,40 @@ $('.editsection').on('click',function(){
         }
     })
 });
+
+function changeCVModal(){
+    $('#changeresume').modal('show');
+}
+function changeresumeremove(){
+    $('#changeresume').modal('hide');
+}
+
+function updateInfo(){
+    $('#updateInfo').modal('show');
+}
+
+function updateInforemove(){
+    $('#updateInfo').modal('hide');
+}
+
+function addresumeDetails(type){
+    $('#detailstype').val(type);
+    $('#addresumedetsila').modal('show');
+}
+
+function removeresumedetails(){
+    $('#addresumedetsila').modal('hide');
+}
+
+
+
+function addskillDetails(type){
+    $('#skilltype').val(type);
+    $('#submitSkillDetails').modal('show');
+}
+function submitSkillDetailsremove(){
+    $('#submitSkillDetails').modal('hide');
+}
 
 
 //========================= Below js is use for kamalk kalra theme (only), still not in  use =======================================

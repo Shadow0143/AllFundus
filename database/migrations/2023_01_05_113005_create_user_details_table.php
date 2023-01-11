@@ -31,6 +31,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('book_image')->nullable();
             $table->string('book_summary')->nullable();
             $table->integer('created_by')->nullable();
+            $table->json('personal_info')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

@@ -19,6 +19,9 @@
         }
 
     </style>
+
+
+
 @endsection
 
 
@@ -30,39 +33,57 @@
             <header class="header" >
                 <div class="container">
                     <div class="header-content">
-                        <h4 class="header-subtitle" >Hello, I am</h4>
+                        <h4 class="header-subtitle" >
+                            @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            @if(empty($usersDetails->small_title)) 
+                                <input type="text" name="small_title" id="small_title" class="text_style small_title" value="Hello! I am">
+                            @else 
+                                <input type="text" name="small_title" id="small_title" class="text_style small_title" value="{{$usersDetails->small_title}}" >
+                            @endif
+                            @else
+                                @if(empty($usersDetails->small_title)) 
+                                    Hello! I am
+                                @else 
+                                    {{$usersDetails->small_title}} 
+                                @endif
+                            @endif
+                        </h4>
                         <h1 class="header-title">{{$user->name}}</h1>
-                        <h6 class="header-mono" >Frond end Designer | Developer</h6>
                     </div>
                 </div>
             </header>
+
+
             <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
                 <div class="container">
                     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                           
-                            <li class="nav-item">
-                                <a href="#about" class="nav-link">About</a>
-                            </li>
-                           
-                        </ul>
+                       
                         <ul class="navbar-nav brand">
+                            
+
+                            @if(empty($usersDetails->user_profile))
                             <img src="{{$user->avatar}}" alt="" class="brand-img">
+
+                            @else
+                                <img src="{{asset('user_profiles')}}/{{$usersDetails->user_profile}}" alt="{{$usersDetails->user_profile}}">
+                            @endif
+
+
                             <li class="brand-txt">
                                 <h5 class="brand-title">{{$user->name}}</h5>
-                                <div class="brand-subtitle">Web Designer | Developer</div>
                             </li>
                         </ul>
-                        <ul class="navbar-nav ml-auto">
-                          
-                            <li class="nav-item">
-                                <a href="#blog" class="nav-link">Blog</a>
+                        <ul>
+                            <li>
+                                @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                <a href="javaScript:void(0);" class="mt-5" onclick="changepicmodal()"> Change pic</a>
+                                @endif
                             </li>
-                           
                         </ul>
+                        
                     </div>
                 </div>
             </nav>
@@ -71,56 +92,54 @@
                     <div class="col-lg-12 about-card">
                         <h3 class="font-weight-light">Who am I ?</h3>
                         <span class="line mb-5"></span>
-                        <h5 class="mb-3">A Web Designer / Developer Located In Our Lovely Earth</h5>
-                        <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit.sit amet, Qui deserunt consequatur fugit repellendusillo voluptas?</p>
-                        <button class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My CV</button>
+                        <p class="mt-20">                   
+                            @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            @if(empty($usersDetails->small_description)) 
+                                <textarea name="small_description" id="small_description" cols="30" rows="10" class="small_description text_style"> A Coder, An Entrepreneur and my goal is to create 10 successful business products by 2031. </textarea>
+                            @else 
+                                <textarea name="small_description" id="small_description" cols="30" rows="10" class="small_description text_style"> {{$usersDetails->small_description}}  </textarea>
+                            @endif
+                            @else
+                                @if(empty($usersDetails->small_description)) 
+                                        A Coder, An Entrepreneur and my goal is to create 10 successful business products by 2031.
+                                @else 
+                                {{$usersDetails->small_description}} 
+                                @endif
+                            @endif
+                        </p>
+                        <a class="btn btn-outline-danger" href="{{asset('resumes')}}/{{$usersDetails->resume}}" target="_blank"><i class="icon-down-circled2 "></i>Download My CV</a>
+
+                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            <a href="javaScript:void(0);" onclick="changeCVModal()" >Change CV</a>
+                        @endif
                     </div>
                     <div class="col-lg-12 about-card">
                         <h3 class="font-weight-light">Personal Info</h3>
                         <span class="line mb-5"></span>
-                        <ul class="mt40 info list-unstyled">
-                            <li><span>Birthdate</span> : 09/13/1996</li>
-                            <li><span>Email</span> : info@website.com</li>
-                            <li><span>Phone</span> : + (123) 456-7890</li>
-                            <li><span>Skype</span> : John_Doe </li>
-                            <li><span>Address</span> :  12345 Fake ST NoWhere AB Country.</li>
+                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                            <a href="javaScript:void(0);" onclick="updateInfo()" class="mb-3">Update Info</a>
+                        @endif
+                        <ul class="mt40 info list-unstyled ">
+                            @foreach (json_decode($usersDetails->personal_info) as $key=>$val)
+                                <li><span>{{$key}}</span> : {{$val}}</li>
+                            @endforeach
                         </ul>
-                        <ul class="social-icons pt-3">
-                            <li class="social-item"><a class="social-link" href="#"><i class="ti-facebook" aria-hidden="true"></i></a></li>
-                            <li class="social-item"><a class="social-link" href="#"><i class="ti-twitter" aria-hidden="true"></i></a></li>
-                            <li class="social-item"><a class="social-link" href="#"><i class="ti-google" aria-hidden="true"></i></a></li>
-                            <li class="social-item"><a class="social-link" href="#"><i class="ti-instagram" aria-hidden="true"></i></a></li>
-                            <li class="social-item"><a class="social-link" href="#"><i class="ti-github" aria-hidden="true"></i></a></li>
-                        </ul>  
+
+                        <div class="socialFooter mt-3">
+                            <div class="social45">
+                                <a href="@if(!empty($usersDetails->insta_link)) {{$usersDetails->insta_link}} @endif" class="fa fa-instagram" target="_blank"></a>
+                                <a href="@if(!empty($usersDetails->fb_link)) {{$usersDetails->fb_link}} @endif" class="fa fa-facebook" target="_blank"></a>
+                                <a href="@if(!empty($usersDetails->whatsapp_number)) https://wa.me/{{$usersDetails->whatsapp_number}} @endif" class="fa fa-whatsapp" target="_blank"></a>
+                                <a href="@if(!empty($usersDetails->youtube_link)) {{$usersDetails->youtube_link}} @endif" class="fa fa-youtube-play" target="_blank"></a>
+                            </div>
+                            @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                <a href="javaScript:void(0);" class="changeRelatedLinks" onclick="changeLinksmodal()"> Change related links</a>
+                            @endif
                     </div>
-                    <div class="col-lg-12 about-card">
-                        <h3 class="font-weight-light">My Expertise</h3>
-                        <span class="line mb-5"></span>
-                        <div class="row">
-                            <div class="col-1 text-danger pt-1"><i class="ti-widget icon-lg"></i></div>
-                            <div class="col-10 ml-auto mr-3">
-                                <h6>UX Design</h6>
-                                <p class="subtitle"> exercitat Repellendus,  corrupt.</p>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-1 text-danger pt-1"><i class="ti-paint-bucket icon-lg"></i></div>
-                            <div class="col-10 ml-auto mr-3">
-                                <h6>Web Development</h6>
-                                <p class="subtitle">Lorem ipsum dolor sit consectetur.</p>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-1 text-danger pt-1"><i class="ti-stats-up icon-lg"></i></div>
-                            <div class="col-10 ml-auto mr-3">
-                                <h6>Digital Marketing</h6>
-                                <p class="subtitle">voluptate commodi illo voluptatib.</p>
-                                <hr>
-                            </div>
-                        </div>
+
+
                     </div>
+                   
                 </div>
             </div>
         
@@ -135,20 +154,22 @@
                                     <div class="mt-2">
                                         <h4>Expertise</h4>
                                         <span class="line"></span>  
+                                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                            <a href="javaScript:void(0)" onclick="addresumeDetails('experties')" >Add experties details</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="title text-danger">2017 - Present</h6>
-                                    <P>UX Developer</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                                    <hr>
-                                    <h6 class="title text-danger">2016 - 2017</h6>
-                                    <P>Front-end Developer</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                                    <hr>
-                                    <h6 class="title text-danger">2015 - 2016</h6>
-                                    <P>UX Designer</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
+
+                                    @foreach ($resume  as $key=>$val)    
+                                        @if($val->type=='experties')
+
+                                        <h6 class="title text-danger">{{$val->title}}</h6>
+                                        <P>{{$val->sub_title}}</P>
+                                        <P class="subtitle">{!! $val->description !!}</P>
+                                        <hr>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -158,20 +179,22 @@
                                     <div class="mt-2">
                                         <h4>Education</h4>
                                         <span class="line"></span>  
+                                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                            <a href="javaScript:void(0)" onclick="addresumeDetails('education')" >Add experties details</a>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="title text-danger">2017 - Present</h6>
-                                    <P>B.E Computer Engineering</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error corrupti recusandae obcaecati odit repellat ducimus cum, minus tempora aperiam at.</P>
-                                    <hr>
-                                    <h6 class="title text-danger">2016 - 2017</h6>
-                                    <P>Diploma in Computer Engineering</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, id officiis quas placeat quia voluptas dolorum rem animi nostrum quae.aliquid repudiandae saepe!.</P>
-                                    <hr>
-                                    <h6 class="title text-danger">2015 - 2016</h6>
-                                    <P>High School Degree</P>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
+                                    @foreach ($resume  as $key=>$val)    
+                                        @if($val->type=='education')
+                                        <h6 class="title text-danger">{{$val->title}}</h6>
+                                        <P>{{$val->sub_title}}</P>
+                                        <P class="subtitle">{!! $val->description !!}</P>
+                                        <hr>
+                                        @endif
+                                    @endforeach
+
                                     
                                 </div>
                             </div>
@@ -181,56 +204,46 @@
                                <div class="card-header">
                                     <div class="pull-left">
                                         <h4 class="mt-2">Skills</h4>
-                                        <span class="line"></span>  
+                                        <span class="line"></span> 
+                                        
+                                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                        <a href="javaScript:void(0)" onclick="addskillDetails('skill')" >Add skill </a>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="card-body pb-2">
-                                   <h6>hTL5 &amp; CSS3</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 97%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>JavaScript</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>PHP</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>SQL</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>Laborum</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>Tempora</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+
+                                    @foreach ($skills  as $key=>$val)    
+                                        @if($val->type=='skill')
+                                        <h6>{{ucfirst($val->title)}}</h6>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{$val->width}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="card">
                                <div class="card-header">
                                     <div class="pull-left">
                                         <h4 class="mt-2">Languages</h4>
-                                        <span class="line"></span>  
+                                        <span class="line"></span> 
+                                        @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                                            <a href="javaScript:void(0)" onclick="addskillDetails('language')" >Add skill </a>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="card-body pb-2">
-                                   <h6>English</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>French</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h6>Spanish</h6>
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    @foreach ($skills  as $key=>$val)    
+                                        @if($val->type=='language')
+                                        <h6>{{ucfirst($val->title)}}</h6>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{$val->width}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -241,31 +254,28 @@
      
             <section class="section" id="service">
                 <div class="container">
+                    @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
+                    <a href="javaScript:void(0)" onclick="addresumeDetails('services')" >Add skill </a>
+                    @endif
                     <h2 class="mb-5 pb-4"><span class="text-danger">My</span> Services</h2>
+
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="card mb-5">
-                               <div class="card-header has-icon">
-                                    <i class="ti-vector text-danger" aria-hidden="true"></i>
+                        @foreach ($resume  as $key=>$val)    
+                            @if($val->type=='services')
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="card mb-5">
+                                    <div class="card-header has-icon">
+                                            <i class="ti-vector text-danger" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="card-body px-4 py-3">
+                                            <h5 class="mb-3 card-title text-dark">{{$val->title}}</h5>
+                                            <P class="subtitle">{!! $val->description !!}</P>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body px-4 py-3">
-                                    <h5 class="mb-3 card-title text-dark">Ullam</h5>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam commodi provident, dolores reiciendis enim pariatur error optio, tempora ex, nihil nesciunt! In praesentium sunt commodi, unde ipsam ex veritatis laboriosam dolor asperiores suscipit blanditiis, dignissimos quos nesciunt nulla aperiam officia.</P>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="card mb-5">
-                               <div class="card-header has-icon">
-                                    <i class="ti-write text-danger" aria-hidden="true"></i>
-                                </div>
-                                <div class="card-body px-4 py-3">
-                                    <h5 class="mb-3 card-title text-dark">Asperiores</h5>
-                                    <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam commodi provident, dolores reiciendis enim pariatur error optio, tempora ex, nihil nesciunt! In praesentium sunt commodi, unde ipsam ex veritatis laboriosam dolor asperiores suscipit blanditiis, dignissimos quos nesciunt nulla aperiam officia.</P>
-                                </div>
-                            </div>
-                        </div>
-                       
+
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -275,7 +285,7 @@
 
 @section('js')
     
-<script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+
 <script src="{{asset('theme4/vendors/bootstrap/bootstrap.bundle.js')}}"></script>
 
 <!-- bootstrap 3 affix -->
@@ -289,5 +299,8 @@
 
 <!-- JohnDoe js -->
 <script src="{{asset('theme4/js/johndoe.js')}}"></script>
+
+
+
 
 @endsection

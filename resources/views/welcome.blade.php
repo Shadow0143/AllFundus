@@ -160,7 +160,7 @@
 @if(Auth::check() && Auth::user()->role=='owner' && $user->id == Auth::user()->id)
 
 
-<button class="" onclick="openForm()" data-toggle="modal" data-target="#myModal">Post</button><br>
+<button class="btn " onclick="openPostForm()">Post</button><br>
 <button class=" btn btn-outline-warning testimonial_btn mr-2" onclick="opentestimonialForm()">Testimonial</button><br>
 <button class="btn btn-outline-dark right_btn" onclick="rightContentForm()">Right Content</button>
 <button class=" btn btn-outline-primary " onclick="tagsCategory()">Tags & category</button>
@@ -173,7 +173,7 @@
                 @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Create Post</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closepostform()">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="user_info">
@@ -615,7 +615,164 @@
     </div>
 </div>
 
+<div class="modal fade pw_modal" id="changeresume" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Resume</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="changeresumeremove()">&times;</button>
+                </div>
+                <div class="modal-body">
 
+                    <div id="goal" name="goal">
+                       
+                        <div class="fieldrow">
+                            <input type="file" placeholder=" Link" name="resume"  id="resume" class="form-control"  accept=".pdf"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Change</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade pw_modal" id="updateInfo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Personal Info</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="updateInforemove()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="personalinfo" id="personalinfo" value="personalinfo" readonly>
+                    <div id="goal" name="goal">
+                        <div class="fieldrow">
+                           <table class="table table-stripped">
+                            <tr>
+                                <td>Date of birth</td>
+                                <td><input type="text" name="dob" id="dob"></td>
+                            </tr>
+                            <tr>
+                                <td>Phone no.</td>
+                                <td><input type="text" name="phone_no" id="phone_no"></td>
+                            </tr>
+                            <tr>
+                                <td>WhatsApp no</td>
+                                <td><input type="text" name="whatsapp_no" id="whatsapp_no"></td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td><input type="text" name="gender" id="gender"></td>
+                            </tr>
+                            <tr>
+                                <td>Skype</td>
+                                <td><input type="text" name="skype" id="skype"></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td><input type="text" name="address" id="address"></td>
+                            </tr>
+                          
+                          
+                           </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Update Info</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade pw_modal" id="addresumedetsila" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('submitResumeDetails') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Add  Details</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="removeresumedetails()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="type" id="detailstype" value="">
+                    <div id="goal" name="goal">
+                        <div class="fieldrow">
+                            <input type="text" name="detailstitle" id="detailstitle" placeholder="Title" class="form-control">
+                        </div>
+                        <div class="fieldrow">
+                            <input type="text" name="detailssubtitle" id="detailssubtitle" placeholder="Sub Title" class="form-control">
+                        </div>
+                        <div class="fieldrow">
+                           <textarea name="detailsdescription" id="detailsdescription" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Add</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade pw_modal" id="submitSkillDetails" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('submitSkillDetails') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h4 class="modal-title">Add  Details</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                        onclick="submitSkillDetailsremove()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="type" id="skilltype" value="">
+                    <div id="goal" name="goal">
+                        <div class="fieldrow">
+                            <input type="text" name="skilltitle" id="skilltitle" placeholder="Title" class="form-control">
+                        </div>
+                        <div class="fieldrow">
+                            <input type="number" name="skillwidth" id="skillwidth" placeholder="" class="form-control">
+                        </div>
+                                             
+                    </div>
+
+                </div>
+                <div class="publish_post text-center mb-3 mt-2">
+                    <button class="publish_post btn btn-outline-primary ">Add</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @endif
@@ -675,28 +832,6 @@
 </script> --}}
 
 <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
-
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-
-    function openForm1() {
-        document.getElementById("myForm1").style.display = "block";
-    }
-
-    function openForm2() {
-        document.getElementById("myForm2").style.display = "block";
-    }
-
-    function openForm2() {
-        document.getElementById("myForm3").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 
 <script>
     CKEDITOR.replace('editor1');

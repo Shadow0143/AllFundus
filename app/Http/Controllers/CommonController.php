@@ -18,6 +18,8 @@ use App\Models\Intrests;
 use App\Models\Contents;
 use App\Models\UserDetails;
 use App\Models\UserGoals;
+use App\Models\Resumes;
+use App\Models\Skills;
 
 class CommonController extends Controller
 {
@@ -60,6 +62,8 @@ class CommonController extends Controller
             $usersDetails                                   = UserDetails::where('created_by',$user->id)->first();
             $usergoals                                      = UserGoals::where('created_by',$user->id)->get();
             $extraSections                                  = Section::where('created_by',$user->id)->orderBy('sequence','asc')->get();
+            $resume                                         = Resumes::where('created_by',$user->id)->orderBy('id','asc')->get();
+            $skills                                         = Skills::where('created_by',$user->id)->orderBy('id','asc')->get();
             // dd($extraSections);
 
         }
@@ -69,6 +73,8 @@ class CommonController extends Controller
             $usersDetails                                   = [];
             $usergoals                                      = [];
             $extraSections                                  = [];
+            $resume                                         = [];
+            $skills                                         = [];
             
         }
 
@@ -88,7 +94,7 @@ class CommonController extends Controller
             return response()->json(['html'=>$view]);
         }
 
-        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals)->with('extraSections',$extraSections);
+        return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals)->with('extraSections',$extraSections)->with('resume',$resume)->with('skills',$skills);
 
     }
 

@@ -52,6 +52,8 @@ Route::post('/create-post', [App\Http\Controllers\PostController::class, 'create
 Route::post('/submit-goals', [App\Http\Controllers\PostController::class, 'submitGoals'])->name('submitGoals');
 Route::post('/update-user_profile',[App\Http\Controllers\PostController::class,'updateUserProfile'])->name('updateUserProfile');
 Route::post('/delete-goal',[App\Http\Controllers\PostController::class,'deleteGoal'])->name('deleteGoal');
+Route::post('/submit-resume-details',[App\Http\Controllers\PostController::class,'submitResumeDetails'])->name('submitResumeDetails');
+Route::post('/submit-skill-details',[App\Http\Controllers\PostController::class,'submitSkillDetails'])->name('submitSkillDetails');
 
 Route::post('/send-comment', [App\Http\Controllers\CommentController::class, 'sendComment'])->name('sendComment');
 Route::get('/delete-comment', [App\Http\Controllers\CommentController::class, 'deletesComment'])->name('deletesComment');

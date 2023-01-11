@@ -11,6 +11,8 @@ use Image;
 use App\Models\postImages;
 use App\Models\UserDetails;
 use App\Models\UserGoals;
+use App\Models\Resumes;
+use App\Models\Skills;
 class PostController extends Controller
 {
     public function createPost(Request $request)
@@ -93,6 +95,22 @@ class PostController extends Controller
 
     public function updateUserProfile(Request $request){
 
+        // dd($request->all());
+
+        if(!empty($request->personalinfo)){
+
+            $data = [
+                'Date of Birth'=>$request->dob,
+                'Phone no.'=>$request->phone_no,
+                'Whatsapp no.'=>$request->whatsapp_no,
+                'Gender'=>$request->gender,
+                'Skype'=>$request->skype,
+                'Address'=>$request->address,
+            ];
+            $jsondata = json_encode($data);
+
+        }
+
         $userExist                                                  = UserDetails::where('user_id',Auth::user()->id)->first();
         $username                                                   = Auth::user()->name;
         $newSegment                                                 = strtolower($username);
@@ -146,8 +164,24 @@ class PostController extends Controller
                 $profile->move($result, $userbookphoto);
                 $updateEntry->book_image                            = $userbookphoto;
             }
+
+
+            if (!empty($request->file('resume'))) {
+                $profile                                            = $request->file('resume');
+                $userresumephoto                                    = $segment  .'-resume-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $result                                             = public_path('resumes');
+                $profile->move($result, $userresumephoto);
+                $updateEntry->resume                                   = $userresumephoto;
+            }
+
+
+
             if(!empty($request->book_summary)){
                 $updateEntry->book_summary                          = $request->book_summary;
+            }
+            
+            if(!empty($request->personalinfo)){
+                $updateEntry->personal_info                         = $jsondata;
             }
             
             $updateEntry->save();
@@ -182,8 +216,17 @@ class PostController extends Controller
                 $profile->move($result, $userbookphoto);
                 $newEntry->book_image                               = $userbookphoto;
             }
+
+            if (!empty($request->file('resume'))) {
+                $profile                                            = $request->file('resume');
+                $userresumephoto                                    = $segment  .'-resume-' . rand(000, 999) .'-'.time(). '.' .$profile->getClientOriginalExtension();
+                $result                                             = public_path('resumes');
+                $profile->move($result, $userresumephoto);
+                $newEntry->resume                                   = $userresumephoto;
+            }
             $newEntry->book_summary                                 = $request->book_summary;
             $newEntry->created_by                                   = Auth::user()->id;
+            $newEntry->personal_info                                = $jsondata;
             $newEntry->save();
         }
 
@@ -194,5 +237,29 @@ class PostController extends Controller
         $logo                                                       = UserGoals::find($request->id);
         unlink('userGoals/'.$logo->image);
         $logo->delete();
+    }
+
+    public function submitResumeDetails(Request $request){
+        $details                                                    = new Resumes();
+        $details->type                                              = $request->type;
+        $details->title                                             = $request->detailstitle;
+        $details->sub_title                                         = $request->detailssubtitle;
+        $details->description                                       = $request->detailsdescription;
+        $details->created_by                                        = Auth::user()->id;
+        $details->save();
+        
+        Alert::success('Success','Added');
+        return back();
+    }
+
+    public function submitSkillDetails(Request $request){
+        $skill                                                      = new Skills();
+        $skill->type                                                = $request->type;
+        $skill->title                                               = $request->skilltitle;
+        $skill->width                                               = $request->skillwidth;
+        $skill->created_by                                          =  Auth::user()->id;
+        $skill->save();
+        Alert::success('Success','Added');
+        return back();
     }
 }

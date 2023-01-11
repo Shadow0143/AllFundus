@@ -121,8 +121,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="{{asset('js/main.js')}}"></script>
-
     @yield('js')
+
 
 
 </body>
