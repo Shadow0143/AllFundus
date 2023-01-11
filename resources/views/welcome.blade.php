@@ -790,10 +790,10 @@
                 </button>
             </div>
             <div class="modal-body loginbtn" >
-                <a href="{{ route('redirectToGoogle') }}"
+                <a href="@if(Request::segment(1)=='') {{ route('fanduredirectToGoogle') }}  @else {{ route('segmentredirectToGoogle',['segment' =>Request::segment(1)]) }}  @endif"
                     class="btn btn-outline-danger btn-block btn-lg google"><i
                         class="fa-brands fa-google-plus-g"></i> </a>
-                <a href="{{ route('loginUsingFacebook') }}"
+                <a href="@if(Request::segment(1)=='') {{ route('loginUsingFacebook') }}  @else {{ route('segmentfbloginUsingFacebook',['segment' =>Request::segment(1)]) }}  @endif"
                             class="btn btn-outline-primary btn-block btn-lg google"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
             </div>
 

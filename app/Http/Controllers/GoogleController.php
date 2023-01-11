@@ -12,10 +12,10 @@ use Session;
 
 class GoogleController extends Controller
 {
-    public function redirectToGoogle()
+    public function redirectToGoogle($segment='')
     {
-        $segment                                = request()->segment(1);
         Session::put('segment', $segment);
+        // dd($segment);
         return Socialite::driver('google')->redirect();
     }
    
@@ -26,12 +26,7 @@ class GoogleController extends Controller
             $finduser                           = User::where('google_id', $user->id)->first();
             if ($finduser) {
                 Auth::login($finduser);
-                return redirect('/');
-
-                // if(!session()->has('url.intended'))
-                // {
-                //     session(['url.intended' => url()->previous(2)]);
-                // }
+                return redirect('/'.Session::get('segment'));
 
             } else {
                 $newUser                            = new User();
@@ -43,13 +38,7 @@ class GoogleController extends Controller
                 $newUser->password                  = encrypt('password');
                 $newUser->save();
                 Auth::login($newUser);
-                return redirect('/');
-
-                // if(!session()->has('url.intended'))
-                // {
-                //     session(['url.intended' => url()->previous(2)]);
-                // }
-
+                return redirect('/'.Session::get('segment'));
             }
         } catch (Exception $e) {
             return redirect('/')->withError('Something went wrong! ' . $e->getMessage());

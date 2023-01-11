@@ -25,8 +25,10 @@ class CommonController extends Controller
 {
     public function index(Request $request)
     {
+        ini_set('max_execution_time', 0);
 
         $segment                                            = request()->segment(1);
+        // dd($segment);
         $user                                               = User::where('segment',$segment)->first();
         if($user){
             $post                                           = Post::where('status', '1')->where('created_by', $user->id)->orderBy('posts.created_at', 'DESC')->paginate(2);
@@ -93,6 +95,8 @@ class CommonController extends Controller
 
             return response()->json(['html'=>$view]);
         }
+
+        // dd($post);
 
         return view('welcome')->with('post', $post)->with('content', $content)->with('testimonials', $testimonials)->with('tags', $tags)->with('category', $category)->with('intrests', $intrests)->with('user', $user)->with('segment',$segment)->with('usersDetails',$usersDetails)->with('usergoals',$usergoals)->with('extraSections',$extraSections)->with('resume',$resume)->with('skills',$skills);
 

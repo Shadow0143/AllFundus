@@ -23,10 +23,13 @@ Auth::routes();
 Route::get('/{segment}', [App\Http\Controllers\CommonController::class, 'index'])->name('commonwelcome');
 
 
-Route::get('/google/login', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+Route::get('/google/login', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('fanduredirectToGoogle');
+Route::get('/google/login/{segment}', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('segmentredirectToGoogle');
+
 Route::any('/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
 Route::get('/fb/auth', [App\Http\Controllers\FacebokController::class, 'loginUsingFacebook'])->name('loginUsingFacebook');
+Route::get('/fb/auth/{segment}', [App\Http\Controllers\FacebokController::class, 'loginUsingFacebook'])->name('segmentfbloginUsingFacebook');
 Route::get('/fb/callback', [App\Http\Controllers\FacebokController::class, 'callbackFromFacebook'])->name('callbackFromFacebook');
 
 
