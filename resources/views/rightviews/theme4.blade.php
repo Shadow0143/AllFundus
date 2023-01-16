@@ -30,7 +30,7 @@
 <div class="helloSec">
     <div class="iContainer">
      
-            <header class="header" >
+            <header class="header header-bg" >
                 <div class="container">
                     <div class="header-content">
                         <h4 class="header-subtitle" >
@@ -66,6 +66,8 @@
 
                             @if(empty($usersDetails->user_profile))
                             <img src="{{$user->avatar}}" alt="" class="brand-img">
+                        
+                            <input type="hidden" name="theme4bannerBG" id="theme4bannerBG" value="@if(empty($usersDetails->user_profile))  {{$user->avatar}} @else {{asset('user_profiles')}}/{{$usersDetails->user_profile}}   @endif">
 
                             @else
                                 <img src="{{asset('user_profiles')}}/{{$usersDetails->user_profile}}" alt="{{$usersDetails->user_profile}}">
@@ -299,8 +301,6 @@
 
 <!-- JohnDoe js -->
 <script src="{{asset('theme4/js/johndoe.js')}}"></script>
-
-
 
 
 @endsection

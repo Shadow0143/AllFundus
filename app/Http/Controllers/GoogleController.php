@@ -15,7 +15,6 @@ class GoogleController extends Controller
     public function redirectToGoogle($segment='')
     {
         Session::put('segment', $segment);
-        // dd($segment);
         return Socialite::driver('google')->redirect();
     }
    

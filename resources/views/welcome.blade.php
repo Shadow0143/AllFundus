@@ -588,7 +588,7 @@
                             <input type="text" placeholder="Subtitle" name="sectionsubtitle" class="form-control" id="sectionsubtitle" />
                         </div>
                         <div class="fieldrow">
-                            <input type="file" name="sectionimage" id="sectionimage" class="form-control">
+                            <input type="file" name="sectionimage" id="sectionimage" class="form-control"  accept=".jpg,.jpeg,.png,.JPG,.JPED,.PNG">
                         </div>
                         <textarea id="sectiontextarea" name="description" class="form-control" required></textarea>
 
@@ -812,31 +812,7 @@
 
 @section('js')
 
-{{-- <script>
-    $('#edit1section').click(function() {
-        var id = $(this).data('id');
-        var sectionId = $(this).data('type');
-        $.ajax({
-            url: "{{route('editSection')}}",
-            type: 'GET',
-            data: {
-                id: id,
-                sectionId: sectionId
-            },
-            success: function(data) {
-                jQuery('#myModal1').modal('show');
-            }
 
-        });
-    });
-</script> --}}
-
-<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
-
-<script>
-    CKEDITOR.replace('editor1');
-    CKEDITOR.replace('sectiontextarea');
-</script>
 
 <script>
     $(document).ready(function() {

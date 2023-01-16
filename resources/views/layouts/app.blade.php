@@ -105,7 +105,6 @@
     <script src="{{asset('lightGallery/modules/lg-thumbnail.js')}}"></script>
     <!-- HTML5/YOUTUBE/VIMEO Video -->
     <script src="{{asset('lightGallery/modules/lg-video.js')}}"></script>
-    <!-- <a href="https://www.jqueryscript.net/zoom/">Zoom</a> -->
     <script src="{{asset('lightGallery/modules/lg-zoom.js')}}"></script>
 
 
@@ -121,6 +120,17 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="{{asset('js/main.js')}}"></script>
+
+
+<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('sectiontextarea');
+</script>
+
+
+
     @yield('js')
 
 
