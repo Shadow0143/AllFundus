@@ -83,10 +83,7 @@
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Core -->
     <script src="{{asset('lightGallery/dist/js/lightgallery.min.js')}}"></script>
     <!-- Autoplay -->
@@ -122,12 +119,12 @@
     <script src="{{asset('js/main.js')}}"></script>
 
 
-<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 
-<script>
-    CKEDITOR.replace('editor1');
-    CKEDITOR.replace('sectiontextarea');
-</script>
+    <script>
+        CKEDITOR.replace('editor1');
+        CKEDITOR.replace('sectiontextarea');
+    </script>
 
 
 

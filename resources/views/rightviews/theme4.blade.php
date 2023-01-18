@@ -18,6 +18,10 @@
             border: 1px solid black !important;
         }
 
+        .small_title{
+            height: 60px !important;
+        }
+
     </style>
 
 

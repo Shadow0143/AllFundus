@@ -1,8 +1,8 @@
 $(document).ready(function(e) {
     $("#lightGallery").lightGallery(e);
     $('#loginwithgooglemodal').modal('show');
-    var bgimage = $('#theme4bannerBG').val();
-    $('.header-bg').css('background-image',bgimage);
+    // var bgimage = $('#theme4bannerBG').val();
+    // $('.header-bg').css('background-image',bgimage);
 });
 
 
